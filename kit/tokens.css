@@ -1,0 +1,69 @@
+/* Design tokens (plain CSS; for Tailwind v4 also import tailwind.css).
+   Dark mode is its own set of steps, not an automatic inversion.
+   Fonts: Inter Variable, Newsreader Variable (opsz), Geist Mono Variable. */
+
+:root {
+  --surface-bg: #f6f6f3;
+  --surface-1: #edede8;
+  --surface-2: #e5e5e1;
+  --surface-beige: #f1ede1;
+  --surface-code: #333333;
+  --line-structure: #cfcfc9;
+  --line-divider: #bebeb6;
+  --line-strong: #404039;
+  --text-primary: #222220;
+  --text-secondary: #3d3d38;
+  --text-tertiary: #6b6b66;
+  --text-disabled: #70706a; /* lightest gray that passes AA (4.6:1) on --surface-bg */
+  --text-link: #4f39f6;
+  --highlight: #fbff7a;
+  --cta: #fbff81;
+  --accent-orange: #c17e2e;
+  --accent-pink: #d05376;
+  --accent-blue: #438aa5;
+  --accent-green: #538a2e;
+  --accent-violet: #8a7fe0;
+  --shadow-button: 0 4px 8px 0 rgb(0 0 0 / 0.05), 0 4px 4px 0 rgb(0 0 0 / 0.03);
+
+  --ease-standard: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --dur-hover: 200ms;
+  --dur-enter: 700ms;
+  --radius: 2px;
+
+  --font-sans: 'Inter Variable', 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Newsreader Variable', 'Newsreader', ui-serif, Georgia, serif;
+  --font-mono: 'Geist Mono Variable', 'Geist Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  --surface-bg: #121212;
+  --surface-1: #191919;
+  --surface-2: #212121;
+  --surface-beige: #1c1b17;
+  --surface-code: #1a1a1a;
+  --line-structure: #ffffff1f;
+  --line-divider: #ffffff29;
+  --line-strong: #8c8c8c;
+  --text-primary: #ebebeb;
+  --text-secondary: #dedede;
+  --text-tertiary: #b3b3b3cc;
+  --text-disabled: #82827c; /* AA 4.8:1 on dark --surface-bg */
+  --text-link: #9d8fff;
+  --accent-orange: #d8964a;
+  --accent-pink: #e0708f;
+  --accent-blue: #5ba5c0;
+  --accent-green: #6fa84a;
+  --accent-violet: #a79ff0;
+  --shadow-button: 0 4px 8px 0 rgb(0 0 0 / 0.3);
+  color-scheme: dark;
+}
+
+/* Theme switch (theme.js): the new theme grows as a circle, so skip the default crossfade */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}

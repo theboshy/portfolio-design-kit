@@ -1,0 +1,365 @@
+/* ── Highlight marker ──────────────────────────────────────── */
+.hl {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  white-space: nowrap;
+}
+.hl-bg {
+  position: absolute;
+  inset-inline: -0.04em;
+  top: 50%;
+  height: 0.76em;
+  transform: translateY(-52%) scaleX(var(--hl-scale, 1));
+  transform-origin: left center;
+  background: var(--highlight);
+  transition: transform 450ms var(--ease-out-expo);
+  transition-delay: calc(var(--hl-i, 0) * 90ms + 150ms);
+}
+.hl-gap > .hl-bg {
+  /* the marker also covers the space between words */
+  inset-inline-end: -0.28em;
+}
+.hl > .relative {
+  position: relative;
+}
+[data-theme='dark'] .hl > .relative {
+  color: #222220;
+}
+.js .reveal:not(.is-visible) .hl-bg,
+.js [data-hl-wait]:not(.is-visible) .hl-bg {
+  --hl-scale: 0;
+}
+
+/* ── CornerBox ─────────────────────────────────────────────────── */
+.cbox {
+  position: relative;
+  border: 1px solid var(--line-structure);
+  background: var(--surface-bg);
+  border-radius: 2px;
+  isolation: isolate;
+}
+/* diagonal stripes on hover */
+.cbox-hover::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    315deg,
+    var(--surface-bg),
+    var(--surface-bg) 2px,
+    color-mix(in oklab, var(--line-strong) 14%, var(--surface-bg)) 4px,
+    var(--surface-bg) 4px
+  );
+  transition: opacity 180ms ease-out;
+}
+/* Bracket corners: one definition shared by cards, buttons and the cursor */
+.cbox-hover::before,
+.corners::before,
+.btn-wrap::before {
+  --c: var(--line-strong);
+  --s: 8px;
+  --w: 1.5px;
+  content: '';
+  position: absolute;
+  inset: -3px;
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0;
+  background:
+    linear-gradient(var(--c), var(--c)) top left / var(--s) var(--w),
+    linear-gradient(var(--c), var(--c)) top left / var(--w) var(--s),
+    linear-gradient(var(--c), var(--c)) top right / var(--s) var(--w),
+    linear-gradient(var(--c), var(--c)) top right / var(--w) var(--s),
+    linear-gradient(var(--c), var(--c)) bottom left / var(--s) var(--w),
+    linear-gradient(var(--c), var(--c)) bottom left / var(--w) var(--s),
+    linear-gradient(var(--c), var(--c)) bottom right / var(--s) var(--w),
+    linear-gradient(var(--c), var(--c)) bottom right / var(--w) var(--s);
+  background-repeat: no-repeat;
+  transition:
+    opacity var(--dur-hover),
+    inset var(--dur-hover) var(--ease-out-expo);
+}
+.cbox-hover:hover::before,
+.cbox-hover:focus-visible::before,
+.cbox-hover:focus-within::before,
+.cbox-hover.is-active::before,
+.corners.is-active::before {
+  opacity: 1;
+  inset: -5px;
+}
+.cbox-hover:hover::after,
+.cbox-hover:focus-visible::after,
+.cbox-hover.is-active::after {
+  opacity: 1;
+}
+.cbox-hover .arrow {
+  transition: transform var(--dur-hover) var(--ease-out-expo);
+}
+.cbox-hover:hover .arrow {
+  transform: translateX(2px);
+}
+/* shared 1px borders: adjacent boxes overlap by 1px so lines never double up */
+.grid-lines > * {
+  margin: -1px 0 0 -1px;
+}
+.grid-lines {
+  padding: 1px 0 0 1px;
+}
+
+/* ── Buttons ───────────────────────────────────────────────────── */
+.btn-wrap {
+  position: relative;
+  display: inline-flex;
+  padding: 4px;
+}
+.btn-wrap::before {
+  --s: 6px;
+  --w: 1px;
+  inset: 0;
+}
+.btn-wrap:hover::before,
+.btn-wrap:focus-within::before {
+  opacity: 1;
+}
+.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  height: 32px;
+  padding-inline: 11px;
+  border: 1px solid var(--line-structure);
+  border-radius: 2px;
+  background: var(--surface-bg);
+  color: var(--text-secondary);
+  box-shadow: var(--shadow-button);
+  font-size: 12.5px;
+  font-weight: 450;
+  letter-spacing: -0.06px;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    border-color var(--dur-hover),
+    transform 100ms;
+  overflow: hidden;
+}
+.btn:hover,
+.btn-wrap:hover .btn {
+  border-color: var(--line-strong);
+}
+.btn:active {
+  transform: translateY(1px);
+  box-shadow: none;
+}
+.btn svg {
+  width: 14px;
+  height: 14px;
+}
+.btn-primary {
+  background: var(--cta);
+  color: #222220;
+  border-color: #404039;
+}
+
+/* border-beam: a spot of light travelling around the border */
+.beam {
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  mask:
+    linear-gradient(#000 0 0) content-box exclude,
+    linear-gradient(#000 0 0);
+  padding: 1px;
+}
+.beam::after {
+  content: '';
+  position: absolute;
+  width: 36px;
+  aspect-ratio: 1;
+  background: radial-gradient(circle, #fff 0%, #fffbe0 30%, transparent 70%);
+  offset-path: rect(0 auto auto 0 round 2px);
+  offset-anchor: center;
+  animation: border-beam 6s linear infinite;
+}
+@keyframes border-beam {
+  to {
+    offset-distance: 100%;
+  }
+}
+
+/* ── Chips / badges ────────────────────────────────────────────── */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  height: 22px;
+  padding-inline: 7px;
+  border: 1px solid var(--line-structure);
+  border-radius: 2px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  color: var(--text-tertiary);
+  background: var(--surface-bg);
+  white-space: nowrap;
+}
+
+/* ── Hero dot grid ─────────────────────────────────────────── */
+.dot-grid {
+  position: absolute;
+  inset: -48px 0;
+  pointer-events: none;
+  background-image: radial-gradient(var(--line-structure) 1px, transparent 1px);
+  background-size: 24px 24px;
+  mask-image: radial-gradient(ellipse 70% 60% at 30% 45%, #000 20%, transparent 75%);
+  opacity: 0.8;
+  animation: grid-drift 24s linear infinite;
+}
+@keyframes grid-drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 24px 48px;
+  }
+}
+
+/* ── Marquee ───────────────────────────────────────────────────── */
+.marquee {
+  overflow: hidden;
+  mask-image: linear-gradient(90deg, transparent, #000 64px, #000 calc(100% - 64px), transparent);
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 40s linear infinite;
+}
+.marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.logo-item {
+  color: var(--text-disabled);
+  transition: color var(--dur-hover);
+}
+.logo-item:hover {
+  color: var(--text-primary);
+}
+
+/* ── Timeline ──────────────────────────────────────────────────── */
+/* Structure (the portfolio does this with Tailwind utilities):
+   <ol class="tl" data-timeline>
+     <span class="tl-track"></span><span class="tl-line"></span>
+     <li class="tl-item"><span class="tl-dot"></span>…</li>
+   </ol> */
+.tl {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.tl-track,
+.tl-line {
+  position: absolute;
+  top: 8px;
+  bottom: 8px;
+  left: 5px;
+  width: 1px;
+  background: var(--line-structure);
+}
+.tl-line {
+  background: var(--text-primary);
+}
+.tl-item {
+  position: relative;
+  padding-left: 32px;
+}
+.tl-dot {
+  position: absolute;
+  left: 0;
+  top: 3px;
+  width: 11px;
+  height: 11px;
+  border-radius: 999px;
+  border: 1px solid var(--line-strong);
+  background: var(--surface-bg);
+}
+.tl-line {
+  transform-origin: top;
+  transform: scaleY(var(--tl-progress, 1));
+}
+.tl-dot {
+  transition:
+    background 300ms,
+    border-color 300ms;
+}
+.tl-item.is-lit .tl-dot {
+  background: var(--text-primary);
+  border-color: var(--text-primary);
+}
+
+/* ── Cursor ────────────────────────────────────────────────────── */
+.cursor {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  pointer-events: none;
+  width: 6px;
+  height: 6px;
+  opacity: 0;
+  /* position and size are interpolated by cursor.ts; CSS only fades it */
+  transition: opacity 200ms;
+}
+.cursor.is-on {
+  opacity: 1;
+}
+.cursor-dot {
+  position: absolute;
+  inset: 0;
+  border-radius: 999px;
+  background: var(--text-primary);
+  transition:
+    opacity 150ms,
+    border-radius 250ms,
+    background 200ms;
+}
+.cursor.is-text .cursor-dot {
+  border-radius: 1px;
+  background: #e6ea3a;
+}
+.cursor.is-frame .cursor-dot {
+  opacity: 0;
+}
+.cursor.corners::before {
+  --s: 9px;
+  inset: 0;
+}
+.cursor.is-frame.corners::before {
+  opacity: 1;
+}
+.cursor-ext {
+  position: absolute;
+  left: 10px;
+  top: -12px;
+  font-size: 11px;
+  font-family: var(--font-mono);
+  color: var(--text-primary);
+  opacity: 0;
+  transition: opacity 150ms;
+}
+.cursor.is-ext .cursor-ext {
+  opacity: 1;
+}
+

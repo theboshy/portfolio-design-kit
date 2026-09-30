@@ -1,0 +1,34 @@
+/* Tailwind v4 bridge: import after tailwindcss and tokens.css.
+   @import 'tailwindcss';
+   @import './kit/tokens.css';
+   @import './kit/tailwind.css';
+   Gives utilities like bg-surface-bg, text-text-tertiary, border-line, font-serif. */
+
+@custom-variant dark (&:where([data-theme='dark'], [data-theme='dark'] *));
+
+@theme {
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Newsreader Variable', ui-serif, Georgia, serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --color-surface-bg: var(--surface-bg);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-beige: var(--surface-beige);
+  --color-surface-code: var(--surface-code);
+  --color-line: var(--line-structure);
+  --color-line-divider: var(--line-divider);
+  --color-line-strong: var(--line-strong);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-disabled: var(--text-disabled);
+  --color-text-link: var(--text-link);
+  --color-highlight: var(--highlight);
+  --color-cta: var(--cta);
+  --color-accent-orange: var(--accent-orange);
+  --color-accent-pink: var(--accent-pink);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-green: var(--accent-green);
+  --color-accent-violet: var(--accent-violet);
+}

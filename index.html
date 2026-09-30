@@ -1,0 +1,1398 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Portfolio Design Kit</title>
+    <meta
+      name="description"
+      content="Colores, tipografía, texturas, animaciones y componentes del portfolio de Peter G. Lobo, listos para reutilizar."
+    />
+    <script>
+      // Theme before first paint (no flash). Follows the OS unless the visitor chose one.
+      (() => {
+        let saved = null;
+        try {
+          saved = localStorage.getItem('theme');
+        } catch {
+          // Storage unavailable: fall back to the system preference.
+        }
+        const dark = saved ? saved === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+        document.documentElement.classList.add('js');
+      })();
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&family=Inter:opsz,wght@14..32,100..900&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap"
+    />
+    <link rel="stylesheet" href="kit/tokens.css" />
+    <link rel="stylesheet" href="kit/base.css" />
+    <link rel="stylesheet" href="kit/motion.css" />
+    <link rel="stylesheet" href="kit/components.css" />
+    <link rel="stylesheet" href="kit/reduced-motion.css" />
+    <style>
+      /* Layout of this sheet only. Everything it uses comes from kit/tokens.css. */
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      h1,
+      h2,
+      h3,
+      p,
+      pre,
+      dl,
+      dd,
+      figure {
+        margin: 0;
+      }
+      button {
+        font: inherit;
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        border-bottom: 1px solid var(--line-structure);
+        background: color-mix(in oklab, var(--surface-bg) 86%, transparent);
+        backdrop-filter: blur(8px);
+      }
+      .topbar-in {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        height: 52px;
+      }
+      .brand {
+        font-family: var(--font-serif);
+        font-size: 17px;
+        font-weight: 500;
+        white-space: nowrap;
+        text-decoration: none;
+      }
+      .toc {
+        display: flex;
+        gap: 2px;
+        margin-inline: auto 0;
+        overflow-x: auto;
+        scrollbar-width: none;
+        mask-image: linear-gradient(90deg, #000 calc(100% - 24px), transparent);
+        padding-right: 24px;
+      }
+      .toc a {
+        padding: 6px 8px;
+        border-radius: var(--radius);
+        color: var(--text-disabled);
+        text-decoration: none;
+        white-space: nowrap;
+        transition: color var(--dur-hover);
+      }
+      .toc a:hover {
+        color: var(--text-primary);
+      }
+      .icon-btn {
+        display: inline-grid;
+        place-items: center;
+        flex: none;
+        width: 32px;
+        height: 32px;
+        border: 1px solid var(--line-structure);
+        border-radius: var(--radius);
+        background: var(--surface-bg);
+        color: var(--text-secondary);
+        cursor: pointer;
+        transition: border-color var(--dur-hover);
+      }
+      .icon-btn:hover {
+        border-color: var(--line-strong);
+      }
+      .icon-btn svg {
+        width: 15px;
+        height: 15px;
+      }
+      [data-theme='dark'] .i-sun,
+      [data-theme='light'] .i-moon {
+        display: none;
+      }
+
+      .hero {
+        position: relative;
+        display: flex;
+        align-items: center;
+        min-height: 72vh;
+        padding-block: 64px;
+      }
+      .stack {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+      }
+      .row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 4px;
+      }
+      .muted {
+        color: var(--text-disabled);
+      }
+      .mt-10 {
+        margin-top: 40px;
+      }
+      .sub {
+        margin-top: 48px;
+        margin-bottom: 16px;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--min, 200px)), 1fr));
+      }
+      .pad {
+        padding: 16px;
+      }
+      @media (min-width: 640px) {
+        .pad {
+          padding: 20px;
+        }
+      }
+
+      /* Swatches */
+      .swatch {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        padding: 0;
+        text-align: left;
+        color: inherit;
+        cursor: pointer;
+      }
+      .swatch-chip {
+        height: 72px;
+        border-bottom: 1px solid var(--line-structure);
+      }
+      .swatch-body {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        padding: 12px;
+      }
+      .swatch-name {
+        font-family: var(--font-mono);
+        font-size: 12px;
+        color: var(--text-primary);
+      }
+      .swatch-vals {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--text-disabled);
+      }
+      .swatch-use {
+        font-size: 12.5px;
+        color: var(--text-tertiary);
+      }
+      .swatch .chip {
+        align-self: flex-start;
+        margin-top: 4px;
+      }
+
+      /* Type */
+      .aa {
+        font-size: 64px;
+        line-height: 1;
+      }
+      .scale-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding-block: 20px;
+        border-top: 1px solid var(--line-structure);
+      }
+      @media (min-width: 768px) {
+        .scale-row {
+          grid-template-columns: 180px 1fr;
+          align-items: baseline;
+        }
+      }
+
+      /* Texture panels */
+      .panel {
+        position: relative;
+        height: 160px;
+        overflow: hidden;
+      }
+      .panel .dot-grid {
+        inset: 0;
+        mask-image: none;
+      }
+      .caption {
+        padding: 12px;
+        border-top: 1px solid var(--line-structure);
+      }
+
+      /* Demo cards */
+      .card {
+        display: flex;
+        flex-direction: column;
+      }
+      .card-head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+        padding: 16px;
+      }
+      .card-head h3 {
+        font-size: 15px;
+        font-weight: 500;
+      }
+      .card-head p {
+        margin-top: 4px;
+        font-size: 13.5px;
+        color: var(--text-tertiary);
+      }
+      .stage {
+        position: relative;
+        display: grid;
+        place-items: center;
+        min-height: 150px;
+        padding: 24px 16px;
+        border-block: 1px solid var(--line-structure);
+        background: var(--surface-1);
+        overflow: hidden;
+      }
+      .stage > * {
+        max-width: 100%;
+      }
+      .freeze,
+      .freeze * {
+        transition: none !important;
+      }
+      .specs {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        gap: 4px 12px;
+        padding: 12px 16px;
+        font-size: 12.5px;
+      }
+      .specs dt {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        color: var(--text-disabled);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        padding-top: 2px;
+      }
+      .specs dd {
+        color: var(--text-secondary);
+      }
+      details.code {
+        margin-top: auto;
+        border-top: 1px solid var(--line-structure);
+      }
+      details.code summary {
+        padding: 10px 16px;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+        color: var(--text-disabled);
+        cursor: pointer;
+      }
+      details.code summary:hover {
+        color: var(--text-primary);
+      }
+      .code-box {
+        position: relative;
+      }
+      pre {
+        margin: 0;
+        padding: 16px;
+        overflow-x: auto;
+        background: var(--surface-code);
+        color: #e8e8e3;
+        font-family: var(--font-mono);
+        font-size: 12px;
+        line-height: 1.6;
+        tab-size: 2;
+      }
+      .copy {
+        position: absolute;
+        top: 8px;
+        right: 8px;
+        height: 24px;
+        padding-inline: 8px;
+        border: 1px solid #ffffff2e;
+        border-radius: var(--radius);
+        background: #ffffff14;
+        color: #e8e8e3;
+        font-family: var(--font-mono);
+        font-size: 11px;
+        cursor: pointer;
+      }
+      code:not(pre code) {
+        font-family: var(--font-mono);
+        font-size: 0.88em;
+        padding: 1px 4px;
+        border-radius: var(--radius);
+        background: var(--surface-1);
+        border: 1px solid var(--line-structure);
+      }
+
+      /* Easing tracks */
+      .ease-row {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        padding: 16px;
+        border-top: 1px solid var(--line-structure);
+      }
+      @media (min-width: 768px) {
+        .ease-row {
+          grid-template-columns: 220px 1fr;
+          align-items: center;
+        }
+      }
+      .track {
+        position: relative;
+        height: 24px;
+        border-bottom: 1px solid var(--line-structure);
+      }
+      .ball {
+        position: absolute;
+        left: 0;
+        bottom: 5px;
+        width: 14px;
+        height: 14px;
+        border-radius: 999px;
+        background: var(--text-primary);
+      }
+      .go .ball {
+        left: calc(100% - 14px);
+      }
+
+      /* Tables */
+      .table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 13.5px;
+      }
+      .table th,
+      .table td {
+        padding: 10px 12px 10px 0;
+        border-top: 1px solid var(--line-structure);
+        text-align: left;
+        vertical-align: top;
+      }
+      .table th {
+        font-family: var(--font-mono);
+        font-size: 11px;
+        font-weight: 400;
+        color: var(--text-disabled);
+        text-transform: uppercase;
+        letter-spacing: 0.04em;
+      }
+      .table td {
+        color: var(--text-secondary);
+      }
+      .table-wrap {
+        overflow-x: auto;
+      }
+
+      .rules {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        padding-left: 18px;
+        color: var(--text-tertiary);
+      }
+      .toast {
+        position: fixed;
+        left: 50%;
+        bottom: 24px;
+        z-index: 60;
+        translate: -50% 12px;
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          opacity var(--dur-hover),
+          translate var(--dur-hover) var(--ease-out-expo);
+      }
+      .toast.is-on {
+        opacity: 1;
+        translate: -50% 0;
+      }
+      footer {
+        margin-top: 120px;
+        padding-block: 32px;
+        border-top: 1px solid var(--line-structure);
+      }
+    </style>
+  </head>
+  <body>
+    <header class="topbar">
+      <div class="container-col topbar-in">
+        <a class="brand" href="#top">Design kit</a>
+        <nav class="toc t-mono" aria-label="Secciones">
+          <a href="#principios">Principios</a>
+          <a href="#color">Color</a>
+          <a href="#tipografia">Tipografía</a>
+          <a href="#texturas">Texturas</a>
+          <a href="#motion">Motion</a>
+          <a href="#componentes">Componentes</a>
+          <a href="#accesibilidad">Accesibilidad</a>
+          <a href="#reutilizar">Reutilizar</a>
+        </nav>
+        <button class="icon-btn" type="button" data-theme-toggle aria-label="Cambiar tema claro/oscuro">
+          <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg>
+          <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" /></svg>
+        </button>
+      </div>
+    </header>
+
+    <main id="top">
+      <!-- Hero: the same structure as the portfolio's -->
+      <section class="hero">
+        <div class="dot-grid" data-parallax aria-hidden="true"></div>
+        <div class="container-col hero-in stack" style="position: relative; gap: 24px">
+          <p class="t-mono muted">Portfolio design kit · v1</p>
+          <h1 class="t-display" style="max-width: 17ch" data-highlight>Papel cálido, líneas finas y un [[solo resaltador]].</h1>
+          <p class="t-body" style="max-width: 52ch; font-size: 16px">
+            Todo el lenguaje visual del portfolio en una hoja: colores, tipografía, texturas, animaciones y componentes.
+            Cada pieza está viva en esta página y el CSS que la produce está en <code>kit/</code>, listo para copiar a un proyecto nuevo.
+          </p>
+          <div class="row" style="margin-left: -4px">
+            <span class="btn-wrap" data-cursor="frame">
+              <a class="btn btn-primary" href="#reutilizar"><span class="beam" aria-hidden="true"></span>Cómo reutilizarlo</a>
+            </span>
+            <span class="btn-wrap" data-cursor="frame">
+              <a class="btn" href="https://github.com/theboshy/portfolio-design-kit" target="_blank" rel="noopener noreferrer">Repo en GitHub <span class="arrow" aria-hidden="true">↗</span></a>
+            </span>
+          </div>
+        </div>
+      </section>
+
+      <!-- 1. Principios -->
+      <section id="principios" class="section container-col reveal">
+        <div class="stack">
+          <p class="t-mono muted">01 · Principios</p>
+          <h2 class="t-h2" data-highlight>La profundidad sale de las [[líneas]], no de las sombras.</h2>
+          <p class="t-body">
+            Una superficie de papel cálido, estructura hecha con hairlines de 1px, una serif editorial para los títulos
+            y el amarillo resaltador como único color fuerte. El modo oscuro es su propia escala, no una inversión.
+          </p>
+        </div>
+        <div class="grid grid-lines mt-10" style="--min: 240px">
+          <div class="cbox cbox-hover pad stack" data-cursor="frame" style="gap: 8px">
+            <p class="t-mono muted">Color</p>
+            <p class="t-body">El amarillo ocupa menos del ~5% de cualquier pantalla: el marcador de los títulos, el botón primario, la selección y los estados activos.</p>
+          </div>
+          <div class="cbox cbox-hover pad stack" data-cursor="frame" style="gap: 8px">
+            <p class="t-mono muted">Estructura</p>
+            <p class="t-body">Radios casi cuadrados (2px). Las tarjetas no tienen sombra. Las cajas vecinas comparten borde, así una grilla se lee como un solo dibujo de líneas.</p>
+          </div>
+          <div class="cbox cbox-hover pad stack" data-cursor="frame" style="gap: 8px">
+            <p class="t-mono muted">Motion</p>
+            <p class="t-body">Corto, con easing y siempre como respuesta a algo: 200ms para hovers y 700ms para lo que entra en pantalla. Todo tiene versión reduced motion.</p>
+          </div>
+          <div class="cbox cbox-hover pad stack" data-cursor="frame" style="gap: 8px">
+            <p class="t-mono muted">Escritura</p>
+            <ul class="rules">
+              <li>Sin em dashes ni divisores punteados: dos puntos, paréntesis, puntos.</li>
+              <li><code>→</code> para rangos de fechas.</li>
+              <li>Emojis como acento: máximo uno por bloque, solo en etiquetas.</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. Color -->
+      <section id="color" class="section container-col reveal">
+        <div class="stack">
+          <p class="t-mono muted">02 · Color</p>
+          <h2 class="t-h2" data-highlight>Tokens para [[claro y oscuro]].</h2>
+          <p class="t-body">
+            Clic en una muestra para copiar <code>var(--token)</code>. La muestra refleja el tema activo; los dos valores
+            están abajo. En los tokens de texto, el badge muestra el contraste real contra <code>--surface-bg</code> en el tema actual.
+          </p>
+        </div>
+        <div data-swatches></div>
+      </section>
+
+      <!-- 3. Tipografía -->
+      <section id="tipografia" class="section container-col reveal">
+        <div class="stack">
+          <p class="t-mono muted">03 · Tipografía</p>
+          <h2 class="t-h2" data-highlight>Una serif, una sans y una [[mono]].</h2>
+          <p class="t-body">Las tres son variables. En el portfolio se sirven desde el propio sitio con @fontsource; aquí vienen de Google Fonts.</p>
+        </div>
+        <div class="grid grid-lines mt-10" style="--min: 230px">
+          <div class="cbox cbox-hover pad stack" data-cursor="frame" style="gap: 12px">
+            <p class="aa" style="font-family: var(--font-serif); font-weight: 450">Aa</p>
+            <div>
+              <p style="font-weight: 500">Newsreader</p>
+              <p class="t-mono muted">--font-serif · 200→800 · opsz 6→72</p>
+            </div>
+            <p class="t-body">Títulos. Serif editorial con tamaños ópticos: se ajusta sola entre display y texto.</p>
+          </div>
+          <div class="cbox cbox-hover pad stack" data-cursor="frame" style="gap: 12px">
+            <p class="aa" style="font-family: var(--font-sans); font-weight: 450">Aa</p>
+            <div>
+              <p style="font-weight: 500">Inter</p>
+              <p class="t-mono muted">--font-sans · 100→900</p>
+            </div>
+            <p class="t-body">Cuerpo e interfaz. 15px, interlineado 150%, tracking −0.075px.</p>
+          </div>
+          <div class="cbox cbox-hover pad stack" data-cursor="frame" style="gap: 12px">
+            <p class="aa" style="font-family: var(--font-mono)">Aa</p>
+            <div>
+              <p style="font-weight: 500">Geist Mono</p>
+              <p class="t-mono muted">--font-mono · 100→900</p>
+            </div>
+            <p class="t-body">Etiquetas, datos y código. 11–12px, en mayúsculas para los eyebrows.</p>
+          </div>
+        </div>
+
+        <h3 class="t-mono muted sub">Escala</h3>
+        <div>
+          <div class="scale-row">
+            <p class="t-mono muted">.t-display<br />serif 450 · clamp(40px, 7vw, 60px) · 1.04 · −0.02em</p>
+            <p class="t-display" data-highlight>Sistemas que [[aguantan]].</p>
+          </div>
+          <div class="scale-row">
+            <p class="t-mono muted">.t-h2<br />serif 500 · 32px · 1.15</p>
+            <p class="t-h2" data-highlight>Cómo [[trabajo]] en equipo</p>
+          </div>
+          <div class="scale-row">
+            <p class="t-mono muted">h3 de tarjeta<br />sans 500 · 17px · −0.01em</p>
+            <p style="font-size: 17px; font-weight: 500; letter-spacing: -0.01em">Payments platform</p>
+          </div>
+          <div class="scale-row">
+            <p class="t-mono muted">body<br />sans 400 · 15px · 1.5</p>
+            <p style="color: var(--text-primary)">Construyo servicios que se entienden, se miden y se pueden cambiar sin miedo.</p>
+          </div>
+          <div class="scale-row">
+            <p class="t-mono muted">.t-body<br />--text-tertiary · máx 64ch</p>
+            <p class="t-body">El párrafo secundario de cada sección: más claro y con una medida de línea cómoda para leer.</p>
+          </div>
+          <div class="scale-row">
+            <p class="t-mono muted">.t-mono<br />mono 12px · 0.04em · mayúsculas</p>
+            <p class="t-mono muted">Experiencia · 2019 → hoy</p>
+          </div>
+          <div class="scale-row">
+            <p class="t-mono muted">.link<br />--text-link · subrayado 1px, offset 3px</p>
+            <p><a class="link" href="#top">Un enlace dentro del texto</a></p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. Texturas -->
+      <section id="texturas" class="section container-col reveal">
+        <div class="stack">
+          <p class="t-mono muted">04 · Texturas y estructura</p>
+          <h2 class="t-h2" data-highlight>Todo se dibuja con [[1px]].</h2>
+          <p class="t-body">Pasa el mouse por encima de cada panel. Las texturas son CSS puro: gradientes, máscaras y pseudo-elementos, sin imágenes.</p>
+        </div>
+        <div class="grid grid-lines mt-10" style="--min: 240px">
+          <figure class="cbox">
+            <div class="panel"><div class="dot-grid" aria-hidden="true"></div></div>
+            <figcaption class="caption"><p class="t-mono">.dot-grid</p><p class="swatch-use">Puntos de 1px cada 24px que derivan en 24s. En el hero lleva una máscara radial y parallax con el puntero.</p></figcaption>
+          </figure>
+          <figure class="cbox">
+            <div class="panel cbox-hover is-active" style="position: relative; isolation: isolate"></div>
+            <figcaption class="caption"><p class="t-mono">Rayas 315°</p><p class="swatch-use">El fondo de <code>.cbox-hover</code> en hover: rayas de 2px al 14% de <code>--line-strong</code>.</p></figcaption>
+          </figure>
+          <figure class="cbox">
+            <div class="panel" style="display: grid; place-items: center">
+              <div class="corners is-active" style="position: relative; width: 96px; height: 56px; border: 1px solid var(--line-structure)"></div>
+            </div>
+            <figcaption class="caption"><p class="t-mono">Esquinas de corchete</p><p class="swatch-use">Un solo pseudo-elemento con 8 gradientes. Compartido por tarjetas, botones y el cursor.</p></figcaption>
+          </figure>
+          <figure class="cbox">
+            <div class="panel" style="display: grid; place-items: center; padding: 20px">
+              <div class="grid grid-lines" style="--min: 40px; width: 100%">
+                <div class="cbox" style="height: 40px"></div><div class="cbox" style="height: 40px"></div><div class="cbox" style="height: 40px"></div>
+                <div class="cbox" style="height: 40px"></div><div class="cbox" style="height: 40px"></div><div class="cbox" style="height: 40px"></div>
+              </div>
+            </div>
+            <figcaption class="caption"><p class="t-mono">.grid-lines</p><p class="swatch-use">Cada hijo se solapa 1px con el vecino: nunca hay bordes dobles.</p></figcaption>
+          </figure>
+        </div>
+        <div class="table-wrap mt-10">
+          <table class="table">
+            <thead><tr><th>Token / valor</th><th>Uso</th></tr></thead>
+            <tbody>
+              <tr><td><code>--radius: 2px</code></td><td>Botones, tarjetas, chips. Solo los pills de estado son redondos.</td></tr>
+              <tr><td><code>--shadow-button</code></td><td>La única sombra del sistema, suave y solo en botones. Desaparece al presionar.</td></tr>
+              <tr><td><code>--line-structure</code></td><td>Todos los bordes y la grilla compartida.</td></tr>
+              <tr><td><code>--line-strong</code></td><td>Bordes en hover y esquinas de corchete.</td></tr>
+              <tr><td>Columna 680px / 840px (≥1280)</td><td><code>.container-col</code>; gutters de 16px en móvil y 32px desde 640px.</td></tr>
+              <tr><td>Secciones 120px / 80px</td><td><code>.section</code>: separación vertical en desktop / móvil.</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 5. Motion -->
+      <section id="motion" class="section container-col reveal">
+        <div class="stack">
+          <p class="t-mono muted">05 · Motion</p>
+          <h2 class="t-h2" data-highlight>Corto, con easing y siempre [[como respuesta]].</h2>
+          <p class="t-body">Tres curvas y dos duraciones cubren casi todo. Cada tarjeta de abajo tiene un botón para repetir la animación y el código que la produce.</p>
+        </div>
+
+        <h3 class="t-mono muted sub">Easings</h3>
+        <div class="cbox" data-easing>
+          <div class="card-head">
+            <p class="swatch-use" style="margin: 0">Mostradas a 1s para que se aprecien; las duraciones reales están en la tabla de abajo.</p>
+            <span class="btn-wrap" data-cursor="frame"><button class="btn" type="button" data-easing-play>Reproducir</button></span>
+          </div>
+          <div class="ease-row">
+            <div><p class="t-mono">standard</p><p class="swatch-vals">--ease-standard · cubic-bezier(.25,.1,.25,1)</p><p class="swatch-use">Reveals de sección</p></div>
+            <div class="track"><span class="ball" style="transition: left 1s var(--ease-standard)"></span></div>
+          </div>
+          <div class="ease-row">
+            <div><p class="t-mono">out-expo</p><p class="swatch-vals">--ease-out-expo · cubic-bezier(.16,1,.3,1)</p><p class="swatch-use">Texto, paneles, resaltador, esquinas</p></div>
+            <div class="track"><span class="ball" style="transition: left 1s var(--ease-out-expo)"></span></div>
+          </div>
+          <div class="ease-row">
+            <div><p class="t-mono">spring</p><p class="swatch-vals">GSAP back.out(1.4) ≈ cubic-bezier(.34,1.4,.64,1)</p><p class="swatch-use">Cajas isométricas que suben en hover</p></div>
+            <div class="track"><span class="ball" style="transition: left 1s cubic-bezier(0.34, 1.4, 0.64, 1)"></span></div>
+          </div>
+        </div>
+        <div class="table-wrap">
+          <table class="table" style="margin-top: 24px">
+            <thead><tr><th>Duración</th><th>Uso</th></tr></thead>
+            <tbody>
+              <tr><td><code>--dur-hover: 200ms</code></td><td>Hovers, colores de borde, esquinas, text-in</td></tr>
+              <tr><td><code>--dur-enter: 700ms</code></td><td>Lo que entra en el viewport (reveal, hero)</td></tr>
+              <tr><td>450ms + 90ms por palabra</td><td>La pintura del resaltador</td></tr>
+              <tr><td>6s · 24s · 40s</td><td>Loops ambientales: border-beam, dot-grid, marquee</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3 class="t-mono muted sub">Animaciones</h3>
+        <div class="grid grid-lines" style="--min: 300px">
+          <article class="cbox card" data-replay="visible">
+            <div class="card-head">
+              <div><h3>Resaltador</h3><p>El marcador amarillo se pinta palabra por palabra detrás del título.</p></div>
+              <button class="btn" type="button" data-replay-btn>Repetir</button>
+            </div>
+            <div class="stage">
+<h2 class="t-h2" data-hl-wait data-highlight>Sistemas que [[aguantan en producción]]</h2>
+            </div>
+            <dl class="specs">
+              <dt>Disparo</dt><dd>Con el reveal de la sección (o <code>.is-visible</code> en un <code>[data-hl-wait]</code>)</dd>
+              <dt>Motion</dt><dd>scaleX(0 → 1), 450ms out-expo, 90ms de escalonado por palabra</dd>
+              <dt>Archivos</dt><dd>components.css · js/highlight.js</dd>
+            </dl>
+            <details class="code"><summary>Código</summary></details>
+          </article>
+
+          <article class="cbox card" data-replay="visible">
+            <div class="card-head">
+              <div><h3>Reveal de sección</h3><p>Sube 16px y aparece la primera vez que entra en pantalla.</p></div>
+              <button class="btn" type="button" data-replay-btn>Repetir</button>
+            </div>
+            <div class="stage">
+<div class="reveal stack" style="gap: 8px">
+  <p class="t-mono muted">Eyebrow</p>
+  <p class="t-h2">Una sección entrando</p>
+</div>
+            </div>
+            <dl class="specs">
+              <dt>Disparo</dt><dd>15% visible, una sola vez (IntersectionObserver)</dd>
+              <dt>Motion</dt><dd>opacity + translateY(16px), 700ms standard</dd>
+              <dt>Archivos</dt><dd>motion.css · js/reveal.js · requiere <code>&lt;html class="js"&gt;</code></dd>
+            </dl>
+            <details class="code"><summary>Código</summary></details>
+          </article>
+
+          <article class="cbox card" data-replay="anim">
+            <div class="card-head">
+              <div><h3>Entrada del hero</h3><p>La misma subida que el reveal, pero solo con CSS para que empiece en el primer paint.</p></div>
+              <button class="btn" type="button" data-replay-btn>Repetir</button>
+            </div>
+            <div class="stage">
+<div class="hero-in stack" data-anim="hero-in" style="gap: 8px">
+  <p class="t-mono muted">Hola, soy</p>
+  <p class="t-h2" data-highlight>Hero con [[resaltador]]</p>
+</div>
+            </div>
+            <dl class="specs">
+              <dt>Disparo</dt><dd>Primer paint (keyframes, sin JS: no retrasa el LCP)</dd>
+              <dt>Motion</dt><dd><code>rise</code> 700ms + <code>paint</code> 450ms tras 350ms</dd>
+              <dt>Archivos</dt><dd>motion.css</dd>
+            </dl>
+            <details class="code"><summary>Código</summary></details>
+          </article>
+
+          <article class="cbox card" data-replay="anim">
+            <div class="card-head">
+              <div><h3>text-in</h3><p>Cuando cambia el contenido de un panel, cada hijo sube 6px y aparece.</p></div>
+              <button class="btn" type="button" data-replay-btn>Repetir</button>
+            </div>
+            <div class="stage">
+<div class="text-in stack" data-anim="text-in" style="gap: 6px">
+  <p class="t-mono muted">API gateway</p>
+  <p style="font-weight: 500">Enruta y limita el tráfico</p>
+  <p class="t-body">Tercer hijo, 100ms después.</p>
+</div>
+            </div>
+            <dl class="specs">
+              <dt>Disparo</dt><dd>Al re-renderizar el contenido del panel</dd>
+              <dt>Motion</dt><dd>200ms out-expo, 50ms de escalonado</dd>
+              <dt>Archivos</dt><dd>motion.css</dd>
+            </dl>
+            <details class="code"><summary>Código</summary></details>
+          </article>
+
+          <article class="cbox card">
+            <div class="card-head">
+              <div><h3>Border beam</h3><p>Un punto de luz recorre el borde del CTA principal. Solo uno por pantalla.</p></div>
+            </div>
+            <div class="stage">
+<span class="btn-wrap" data-cursor="frame">
+  <a class="btn btn-primary" href="#motion">
+    <span class="beam" aria-hidden="true"></span>
+    Acción principal
+  </a>
+</span>
+            </div>
+            <dl class="specs">
+              <dt>Disparo</dt><dd>Siempre</dd>
+              <dt>Motion</dt><dd><code>offset-path: rect()</code> alrededor del botón, 6s lineal</dd>
+              <dt>Archivos</dt><dd>components.css</dd>
+            </dl>
+            <details class="code"><summary>Código</summary></details>
+          </article>
+
+          <article class="cbox card">
+            <div class="card-head">
+              <div><h3>Marquee</h3><p>Una cinta de logos que se detiene en hover. El contenido va duplicado para cerrar el loop.</p></div>
+            </div>
+            <div class="stage" style="padding-inline: 0">
+<div class="marquee cbox" style="width: 100%; padding-block: 16px" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="logo-item t-mono" style="padding-inline: 20px">TypeScript</span>
+    <span class="logo-item t-mono" style="padding-inline: 20px">Go</span>
+    <span class="logo-item t-mono" style="padding-inline: 20px">Kafka</span>
+    <span class="logo-item t-mono" style="padding-inline: 20px">Postgres</span>
+    <span class="logo-item t-mono" style="padding-inline: 20px">AWS</span>
+    <!-- …the same items again -->
+    <span class="logo-item t-mono" style="padding-inline: 20px">TypeScript</span>
+    <span class="logo-item t-mono" style="padding-inline: 20px">Go</span>
+    <span class="logo-item t-mono" style="padding-inline: 20px">Kafka</span>
+    <span class="logo-item t-mono" style="padding-inline: 20px">Postgres</span>
+    <span class="logo-item t-mono" style="padding-inline: 20px">AWS</span>
+  </div>
+</div>
+            </div>
+            <dl class="specs">
+              <dt>Disparo</dt><dd>Siempre; pausa en hover</dd>
+              <dt>Motion</dt><dd>translateX(0 → −50%), 40s lineal, máscara con fade de 64px</dd>
+              <dt>Archivos</dt><dd>components.css</dd>
+            </dl>
+            <details class="code"><summary>Código</summary></details>
+          </article>
+
+          <article class="cbox card">
+            <div class="card-head">
+              <div><h3>Ping</h3><p>Un indicador de estado que late. Solo en pills de estado.</p></div>
+            </div>
+            <div class="stage">
+<span class="chip" style="gap: 8px">
+  <span style="position: relative; display: inline-flex; width: 7px; height: 7px">
+    <span class="ping" style="position: absolute; inset: 0; border-radius: 999px; background: var(--accent-green); opacity: 0.6"></span>
+    <span style="position: relative; width: 7px; height: 7px; border-radius: 999px; background: var(--accent-green)"></span>
+  </span>
+  En producción
+</span>
+            </div>
+            <dl class="specs">
+              <dt>Disparo</dt><dd>Siempre</dd>
+              <dt>Motion</dt><dd>scale(2.2) + fade, 2s, cubic-bezier(0,0,.2,1)</dd>
+              <dt>Archivos</dt><dd>motion.css</dd>
+            </dl>
+            <details class="code"><summary>Código</summary></details>
+          </article>
+
+          <article class="cbox card">
+            <div class="card-head">
+              <div><h3>Corner box</h3><p>En hover o foco aparecen cuatro esquinas por fuera y el fondo se vuelve rayado.</p></div>
+            </div>
+            <div class="stage">
+<article class="cbox cbox-hover" data-cursor="frame" tabindex="0" style="padding: 16px; width: 240px">
+  <p style="font-weight: 500">Pasa el mouse <span class="arrow" style="display: inline-block">→</span></p>
+  <p class="t-mono muted" style="margin-top: 6px">.cbox .cbox-hover</p>
+</article>
+            </div>
+            <dl class="specs">
+              <dt>Disparo</dt><dd>Hover, foco o <code>.is-active</code></dd>
+              <dt>Motion</dt><dd>inset −3px → −5px, 200ms out-expo; rayas con fade de 180ms</dd>
+              <dt>Archivos</dt><dd>components.css</dd>
+            </dl>
+            <details class="code"><summary>Código</summary></details>
+          </article>
+
+          <article class="cbox card">
+            <div class="card-head">
+              <div><h3>Cursor</h3><p>Un punto sigue al cursor nativo (que nunca se oculta). Sobre texto es un caret amarillo; sobre <code>[data-cursor="frame"]</code>, un marco de esquinas.</p></div>
+            </div>
+            <div class="stage" style="gap: 16px">
+<div class="stack" style="align-items: center">
+  <p>Pasa sobre este texto</p>
+  <span class="chip" data-cursor="frame">y sobre este chip</span>
+</div>
+            </div>
+            <dl class="specs">
+              <dt>Disparo</dt><dd>Movimiento del puntero, solo punteros finos</dd>
+              <dt>Motion</dt><dd>Persigue al objetivo con factor 0.2 por frame; el loop de rAF duerme al asentarse</dd>
+              <dt>Archivos</dt><dd>components.css · js/cursor.js</dd>
+            </dl>
+            <details class="code"><summary>Código</summary></details>
+          </article>
+
+          <article class="cbox card">
+            <div class="card-head">
+              <div><h3>Cambio de tema</h3><p>El tema nuevo crece como un círculo desde el botón (View Transitions API).</p></div>
+            </div>
+            <div class="stage">
+<button class="icon-btn" type="button" data-theme-toggle aria-label="Cambiar tema">◐</button>
+            </div>
+            <dl class="specs">
+              <dt>Disparo</dt><dd>Clic en <code>[data-theme-toggle]</code>; se guarda en localStorage</dd>
+              <dt>Motion</dt><dd>clip-path circle(0 → radio), 500ms out-expo</dd>
+              <dt>Archivos</dt><dd>tokens.css · js/theme.js</dd>
+            </dl>
+            <details class="code"><summary>Código</summary></details>
+          </article>
+        </div>
+
+        <h3 class="t-mono muted sub">Timeline que se dibuja con el scroll</h3>
+        <article class="cbox card">
+          <div class="stage" style="display: block; padding: 24px">
+<ol class="tl" data-timeline>
+  <span class="tl-track" aria-hidden="true"></span>
+  <span class="tl-line" aria-hidden="true"></span>
+  <li class="tl-item">
+    <span class="tl-dot" aria-hidden="true"></span>
+    <p class="t-mono muted">2024 → hoy</p>
+    <div class="cbox cbox-hover" data-cursor="frame" style="margin-top: 8px; padding: 16px">Senior Software Engineer</div>
+  </li>
+  <li class="tl-item">
+    <span class="tl-dot" aria-hidden="true"></span>
+    <p class="t-mono muted">2021 → 2024</p>
+    <div class="cbox cbox-hover" data-cursor="frame" style="margin-top: 8px; padding: 16px">Backend Engineer</div>
+  </li>
+  <li class="tl-item">
+    <span class="tl-dot" aria-hidden="true"></span>
+    <p class="t-mono muted">2019 → 2021</p>
+    <div class="cbox cbox-hover" data-cursor="frame" style="margin-top: 8px; padding: 16px">Software Developer</div>
+  </li>
+</ol>
+          </div>
+          <dl class="specs">
+            <dt>Disparo</dt><dd>Scroll: el "lápiz" está al 60% del alto de la ventana</dd>
+            <dt>Motion</dt><dd>scaleY(<code>--tl-progress</code>) en la línea; cada punto se enciende al alcanzarlo (300ms)</dd>
+            <dt>Archivos</dt><dd>components.css · js/timeline.js</dd>
+          </dl>
+          <details class="code"><summary>Código</summary></details>
+        </article>
+      </section>
+
+      <!-- 6. Componentes -->
+      <section id="componentes" class="section container-col reveal">
+        <div class="stack">
+          <p class="t-mono muted">06 · Componentes</p>
+          <h2 class="t-h2" data-highlight>Piezas pequeñas, [[una sola regla]] de bordes.</h2>
+          <p class="t-body">El HTML de cada uno está listo para copiar. En el portfolio son componentes de Astro con la misma estructura.</p>
+        </div>
+        <div class="grid grid-lines mt-10" style="--min: 300px">
+          <article class="cbox card">
+            <div class="card-head"><div><h3>Button</h3><p>32px de alto, radio 2px, sombra suave y marco de esquinas en hover. El primario usa <code>--cta</code>.</p></div></div>
+            <div class="stage">
+<div class="row">
+  <span class="btn-wrap" data-cursor="frame">
+    <a class="btn btn-primary" href="#componentes">Primario</a>
+  </span>
+  <span class="btn-wrap" data-cursor="frame">
+    <a class="btn" href="#componentes">Secundario <span class="arrow" aria-hidden="true">→</span></a>
+  </span>
+</div>
+            </div>
+            <details class="code"><summary>Código</summary></details>
+          </article>
+
+          <article class="cbox card">
+            <div class="card-head"><div><h3>Chip</h3><p>Tag mono de 11px con borde fino, para stacks y estados.</p></div></div>
+            <div class="stage">
+<div class="row" style="gap: 6px">
+  <span class="chip">TypeScript</span>
+  <span class="chip">Kafka</span>
+  <span class="chip">🔒 Privado</span>
+</div>
+            </div>
+            <details class="code"><summary>Código</summary></details>
+          </article>
+
+          <article class="cbox card">
+            <div class="card-head"><div><h3>SectionHead</h3><p>Eyebrow mono, título serif con resaltador y párrafo de cuerpo.</p></div></div>
+            <div class="stage" style="place-items: start">
+<div class="stack">
+  <p class="t-mono muted">Stack</p>
+  <h2 class="t-h2" data-highlight>Herramientas que [[conozco a fondo]]</h2>
+  <p class="t-body">Un párrafo corto que explica la sección.</p>
+</div>
+            </div>
+            <details class="code"><summary>Código</summary></details>
+          </article>
+
+          <article class="cbox card">
+            <div class="card-head"><div><h3>Grilla de tarjetas</h3><p><code>.grid-lines</code> + <code>.cbox-hover</code>: una grilla que se lee como un dibujo continuo.</p></div></div>
+            <div class="stage">
+<div class="grid grid-lines" style="--min: 120px; width: 100%">
+  <div class="cbox cbox-hover" data-cursor="frame" style="padding: 12px">Backend</div>
+  <div class="cbox cbox-hover" data-cursor="frame" style="padding: 12px">Data</div>
+  <div class="cbox cbox-hover" data-cursor="frame" style="padding: 12px">Infra</div>
+  <div class="cbox cbox-hover" data-cursor="frame" style="padding: 12px">Frontend</div>
+</div>
+            </div>
+            <details class="code"><summary>Código</summary></details>
+          </article>
+        </div>
+      </section>
+
+      <!-- 7. Accesibilidad -->
+      <section id="accesibilidad" class="section container-col reveal">
+        <div class="stack">
+          <p class="t-mono muted">07 · Reduced motion y accesibilidad</p>
+          <h2 class="t-h2" data-highlight>Nada se mueve [[sin permiso]].</h2>
+          <p class="t-body">
+            <code>reduced-motion.css</code> se importa al final y neutraliza cada animación. Los scripts también leen
+            <code>prefers-reduced-motion</code>. Pruébalo en DevTools → Rendering → Emulate CSS prefers-reduced-motion.
+          </p>
+        </div>
+        <div class="table-wrap mt-10">
+          <table class="table">
+            <thead><tr><th>Comportamiento</th><th>Con reduced motion</th></tr></thead>
+            <tbody>
+              <tr><td>Reveal, entrada del hero</td><td>Visible de inmediato</td></tr>
+              <tr><td>Resaltador</td><td>Marcador estático</td></tr>
+              <tr><td>text-in, ping, dot-grid, marquee</td><td>Sin animación</td></tr>
+              <tr><td>Border beam</td><td>Oculto</td></tr>
+              <tr><td>Timeline</td><td>Dibujado completo</td></tr>
+              <tr><td>Cursor, parallax</td><td>Desactivados</td></tr>
+              <tr><td>Cambio de tema</td><td>Instantáneo</td></tr>
+              <tr><td>Corner box en hover</td><td>Se mantiene (no es movimiento)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <ul class="rules mt-10">
+          <li>Todos los tokens de texto pasan WCAG AA (4.5:1) sobre su superficie. <code>--text-disabled</code> es el gris más claro que todavía pasa.</li>
+          <li>Sobre el amarillo el texto siempre es oscuro (<code>#222220</code>), también en modo oscuro.</li>
+          <li>El foco visible es un outline de 2px en <code>--text-link</code> con offset de 2px.</li>
+          <li>El cursor nativo nunca se oculta; el personalizado solo lo decora y solo en punteros finos.</li>
+          <li>Las animaciones de más de 5 segundos con contenido llevan botón de pausa visible (WCAG 2.2.2).</li>
+        </ul>
+      </section>
+
+      <!-- 8. Reutilizar -->
+      <section id="reutilizar" class="section container-col reveal">
+        <div class="stack">
+          <p class="t-mono muted">08 · Cómo reutilizar</p>
+          <h2 class="t-h2" data-highlight>De esta hoja a un [[proyecto nuevo]].</h2>
+          <p class="t-body">Copia la carpeta <code>kit/</code> a tu proyecto y elige una de las dos rutas.</p>
+        </div>
+
+        <h3 class="t-mono muted sub">A · HTML / CSS puro</h3>
+        <div class="code-box"><pre data-copyable>&lt;!-- &lt;head&gt; --&gt;
+&lt;script&gt;
+  // theme before first paint + enables the .js-only animations
+  (() =&gt; {
+    let saved = null;
+    try { saved = localStorage.getItem('theme'); } catch {}
+    const dark = saved ? saved === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+    document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+    document.documentElement.classList.add('js');
+  })();
+&lt;/script&gt;
+&lt;link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@100..900&amp;family=Inter:opsz,wght@14..32,100..900&amp;family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&amp;display=swap" /&gt;
+&lt;link rel="stylesheet" href="kit/tokens.css" /&gt;
+&lt;link rel="stylesheet" href="kit/base.css" /&gt;
+&lt;link rel="stylesheet" href="kit/motion.css" /&gt;
+&lt;link rel="stylesheet" href="kit/components.css" /&gt;
+&lt;link rel="stylesheet" href="kit/reduced-motion.css" /&gt; &lt;!-- always last --&gt;
+
+&lt;!-- end of &lt;body&gt; --&gt;
+&lt;script type="module" src="kit/js/index.js"&gt;&lt;/script&gt;</pre></div>
+
+        <h3 class="t-mono muted sub">B · Tailwind v4 (Astro, Vite, Next…)</h3>
+        <div class="code-box"><pre data-copyable>/* src/styles/global.css */
+@import 'tailwindcss';
+@import '@fontsource-variable/inter';
+@import '@fontsource-variable/newsreader/opsz.css';
+@import '@fontsource-variable/geist-mono';
+
+@import '../kit/tokens.css';
+@import '../kit/tailwind.css';   /* @theme: bg-surface-bg, text-text-tertiary, border-line, font-serif… */
+@import '../kit/base.css';
+@import '../kit/motion.css';
+@import '../kit/components.css';
+@import '../kit/reduced-motion.css';
+
+# pnpm add @fontsource-variable/inter @fontsource-variable/newsreader @fontsource-variable/geist-mono</pre></div>
+
+        <h3 class="t-mono muted sub">Para cambiar la marca</h3>
+        <ul class="rules">
+          <li>Cambia <code>--highlight</code> y <code>--cta</code> en <code>tokens.css</code>: el resto del sistema es neutro.</li>
+          <li>Ajusta <code>--surface-bg</code> para mover la temperatura del papel; mantén <code>--line-structure</code> unos 3 pasos más oscuro.</li>
+          <li>Vuelve a revisar el contraste de <code>--text-disabled</code>: es el que está más al límite.</li>
+          <li>Escribe los títulos con <code>[[...]]</code> y un <code>data-highlight</code> para tener el resaltador.</li>
+        </ul>
+      </section>
+    </main>
+
+    <footer>
+      <div class="container-col row" style="justify-content: space-between; gap: 12px">
+        <p class="t-mono muted">Extraído de theboshy.github.io</p>
+        <p class="t-mono muted">MIT · Peter G. Lobo</p>
+      </div>
+    </footer>
+
+    <div class="toast chip" role="status" aria-live="polite" data-toast></div>
+
+    <script>
+      // A classic script (not a module) so the sheet also works when opened with a double click.
+      // The reusable versions of these behaviors live in kit/js/.
+      (() => {
+        const prefersReducedMotion = matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const finePointer = matchMedia('(pointer: fine)').matches;
+        const rafThrottle = (fn) => {
+          let frame = 0;
+          let lastArgs;
+          return (...args) => {
+            lastArgs = args;
+            if (frame) return;
+            frame = requestAnimationFrame(() => {
+              frame = 0;
+              fn(...lastArgs);
+            });
+          };
+        };
+        const root = document.documentElement;
+
+        /* Tokens (values mirror kit/tokens.css) */
+        const groups = [
+          ['Superficies', [
+            ['surface-bg', '#f6f6f3', '#121212', 'Fondo de página y de tarjetas'],
+            ['surface-1', '#edede8', '#191919', 'Áreas hundidas, caras de las cajas iso'],
+            ['surface-2', '#e5e5e1', '#212121', 'Un paso más hundido'],
+            ['surface-beige', '#f1ede1', '#1c1b17', 'Variante cálida'],
+            ['surface-code', '#333333', '#1a1a1a', 'Bloques de código'],
+          ]],
+          ['Líneas', [
+            ['line-structure', '#cfcfc9', '#ffffff1f', 'Bordes y la grilla compartida'],
+            ['line-divider', '#bebeb6', '#ffffff29', 'Divisores'],
+            ['line-strong', '#404039', '#8c8c8c', 'Bordes en hover, esquinas'],
+          ]],
+          ['Texto', [
+            ['text-primary', '#222220', '#ebebeb', 'Títulos', true],
+            ['text-secondary', '#3d3d38', '#dedede', 'Texto de tarjetas', true],
+            ['text-tertiary', '#6b6b66', '#b3b3b3cc', 'Cuerpo (.t-body)', true],
+            ['text-disabled', '#70706a', '#82827c', 'Etiquetas mono y metadatos', true],
+            ['text-link', '#4f39f6', '#9d8fff', 'Enlaces y foco', true],
+          ]],
+          ['Resaltador', [
+            ['highlight', '#fbff7a', '#fbff7a', 'Marcador, selección, estados activos'],
+            ['cta', '#fbff81', '#fbff81', 'Botón primario'],
+          ]],
+          ['Acentos (solo diagramas)', [
+            ['accent-blue', '#438aa5', '#5ba5c0', 'Nodos'],
+            ['accent-pink', '#d05376', '#e0708f', 'Nodos'],
+            ['accent-orange', '#c17e2e', '#d8964a', 'Nodos'],
+            ['accent-green', '#538a2e', '#6fa84a', 'Nodos, estado ok'],
+            ['accent-violet', '#8a7fe0', '#a79ff0', 'Nodos'],
+          ]],
+        ];
+
+        const rgba = (hex) => {
+          const h = hex.trim().replace('#', '');
+          const n = (i) => parseInt(h.slice(i, i + 2), 16);
+          return [n(0), n(2), n(4), h.length === 8 ? n(6) / 255 : 1];
+        };
+        const luminance = ([r, g, b]) => {
+          const c = (v) => ((v /= 255) <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4);
+          return 0.2126 * c(r) + 0.7152 * c(g) + 0.0722 * c(b);
+        };
+        const contrast = (fgHex, bgHex) => {
+          const bg = rgba(bgHex);
+          const [r, g, b, a] = rgba(fgHex);
+          const fg = [r * a + bg[0] * (1 - a), g * a + bg[1] * (1 - a), b * a + bg[2] * (1 - a)];
+          const [l1, l2] = [luminance(fg), luminance(bg)].sort((x, y) => y - x);
+          return (l1 + 0.05) / (l2 + 0.05);
+        };
+
+        const swatches = document.querySelector('[data-swatches]');
+        swatches.innerHTML = groups
+          .map(
+            ([title, tokens]) =>
+              `<h3 class="t-mono muted sub">${title}</h3><div class="grid grid-lines" style="--min: 170px">` +
+              tokens
+                .map(
+                  ([name, light, dark, use, isText]) =>
+                    `<button type="button" class="cbox cbox-hover swatch" data-cursor="frame" data-copy="var(--${name})">` +
+                    `<span class="swatch-chip" style="background: var(--${name})"></span>` +
+                    `<span class="swatch-body"><span class="swatch-name">--${name}</span>` +
+                    `<span class="swatch-vals">L ${light} · D ${dark}</span><span class="swatch-use">${use}</span>` +
+                    (isText ? `<span class="chip" data-contrast="${name}" data-light="${light}" data-dark="${dark}"></span>` : '') +
+                    `</span></button>`,
+                )
+                .join('') +
+              `</div>`,
+          )
+          .join('');
+
+        const updateContrast = () => {
+          const dark = root.dataset.theme === 'dark';
+          const bg = dark ? '#121212' : '#f6f6f3';
+          swatches.querySelectorAll('[data-contrast]').forEach((chip) => {
+            const ratio = contrast(dark ? chip.dataset.dark : chip.dataset.light, bg);
+            chip.textContent = `${ratio >= 7 ? 'AAA' : ratio >= 4.5 ? 'AA' : '✕'} ${ratio.toFixed(1)}:1`;
+          });
+        };
+        updateContrast();
+        new MutationObserver(updateContrast).observe(root, { attributes: true, attributeFilter: ['data-theme'] });
+
+        /* Code panels: show each stage's own markup, captured before any script touches it */
+        const dedent = (s) => {
+          const lines = s.replace(/^\n+|\s+$/g, '').split('\n');
+          const indent = Math.min(...lines.filter((l) => l.trim()).map((l) => l.match(/^ */)[0].length));
+          return lines.map((l) => l.slice(indent)).join('\n');
+        };
+        const escapeHTML = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+        document.querySelectorAll('.card').forEach((card) => {
+          const stage = card.querySelector('.stage');
+          const details = card.querySelector('details.code');
+          if (!stage || !details) return;
+          const html = dedent(stage.innerHTML).replace(/ data-anim="[^"]*"/g, '');
+          details.insertAdjacentHTML('beforeend', `<div class="code-box"><pre data-copyable>${escapeHTML(html)}</pre></div>`);
+        });
+        document.querySelectorAll('[data-copyable]').forEach((pre) => {
+          pre.parentElement.insertAdjacentHTML('beforeend', '<button class="copy" type="button">Copiar</button>');
+          pre.parentElement.querySelector('.copy').addEventListener('click', () => copy(pre.textContent, 'Código copiado'));
+        });
+
+        /* Copy + toast */
+        const toast = document.querySelector('[data-toast]');
+        let toastTimer = 0;
+        const copy = async (text, label) => {
+          try {
+            await navigator.clipboard.writeText(text);
+            toast.textContent = label;
+          } catch {
+            toast.textContent = 'No se pudo copiar';
+          }
+          toast.classList.add('is-on');
+          clearTimeout(toastTimer);
+          toastTimer = setTimeout(() => toast.classList.remove('is-on'), 1400);
+        };
+        swatches.addEventListener('click', (e) => {
+          const el = e.target.closest('[data-copy]');
+          if (el) copy(el.dataset.copy, `Copiado ${el.dataset.copy}`);
+        });
+
+        /* Highlight: [[...]] → one marker span per word (kit/js/highlight.js) */
+        const escapeText = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+        const highlightHTML = (text) => {
+          let index = 0;
+          return text
+            .split(/\[\[|\]\]/)
+            .map((chunk, i) => {
+              if (!chunk) return '';
+              if (i % 2 === 0) return escapeText(chunk);
+              const words = chunk.split(' ');
+              return words
+                .map((word, w) => {
+                  const gap = w < words.length - 1;
+                  return (
+                    `<span class="hl${gap ? ' hl-gap' : ''}" style="--hl-i:${index++}">` +
+                    `<span class="hl-bg" aria-hidden="true"></span><span class="relative">${escapeText(word)}</span></span>` +
+                    (gap ? ' ' : '')
+                  );
+                })
+                .join('');
+            })
+            .join('');
+        };
+        document.querySelectorAll('[data-highlight]').forEach((el) => (el.innerHTML = highlightHTML(el.textContent)));
+
+        /* Reveal (kit/js/reveal.js), also paints [data-hl-wait] */
+        const io = new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              if (!entry.isIntersecting) continue;
+              entry.target.classList.add('is-visible');
+              io.unobserve(entry.target);
+            }
+          },
+          { threshold: 0.15 },
+        );
+        document.querySelectorAll('.reveal, [data-hl-wait]').forEach((el) => io.observe(el));
+
+        /* Replay buttons */
+        document.querySelectorAll('[data-replay-btn]').forEach((btn) =>
+          btn.addEventListener('click', () => {
+            const card = btn.closest('.card');
+            const stage = card.querySelector('.stage');
+            if (card.dataset.replay === 'visible') {
+              const targets = stage.querySelectorAll('.reveal, [data-hl-wait]');
+              stage.classList.add('freeze');
+              targets.forEach((el) => el.classList.remove('is-visible'));
+              void stage.offsetWidth;
+              stage.classList.remove('freeze');
+              requestAnimationFrame(() => requestAnimationFrame(() => targets.forEach((el) => el.classList.add('is-visible'))));
+            } else {
+              stage.querySelectorAll('[data-anim]').forEach((el) => {
+                el.classList.remove(el.dataset.anim);
+                void el.offsetWidth;
+                el.classList.add(el.dataset.anim);
+              });
+            }
+          }),
+        );
+
+        /* Easing demo */
+        const easing = document.querySelector('[data-easing]');
+        document.querySelector('[data-easing-play]').addEventListener('click', () => easing.classList.toggle('go'));
+
+        /* Theme (kit/js/theme.js) */
+        document.querySelectorAll('[data-theme-toggle]').forEach((button) =>
+          button.addEventListener('click', () => {
+            const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+            const apply = () => {
+              root.dataset.theme = next;
+              try {
+                localStorage.setItem('theme', next);
+              } catch {
+                // Not persisted; the switch still works for this page view.
+              }
+            };
+            if (!document.startViewTransition || prefersReducedMotion) {
+              apply();
+              return;
+            }
+            const r = button.getBoundingClientRect();
+            const x = r.left + r.width / 2;
+            const y = r.top + r.height / 2;
+            const radius = Math.hypot(Math.max(x, innerWidth - x), Math.max(y, innerHeight - y));
+            document
+              .startViewTransition(apply)
+              .ready.then(() =>
+                root.animate(
+                  { clipPath: [`circle(0px at ${x}px ${y}px)`, `circle(${radius}px at ${x}px ${y}px)`] },
+                  { duration: 500, easing: 'cubic-bezier(.16,1,.3,1)', pseudoElement: '::view-transition-new(root)' },
+                ),
+              );
+          }),
+        );
+
+        /* Timeline (kit/js/timeline.js) */
+        document.querySelectorAll('[data-timeline]').forEach((timeline) => {
+          const items = [...timeline.querySelectorAll('.tl-item')];
+          if (prefersReducedMotion) {
+            items.forEach((item) => item.classList.add('is-lit'));
+            return;
+          }
+          const update = () => {
+            const mark = innerHeight * 0.6;
+            const rect = timeline.getBoundingClientRect();
+            const progress = Math.min(1, Math.max(0, (mark - rect.top) / rect.height));
+            timeline.style.setProperty('--tl-progress', String(progress));
+            items.forEach((item) => item.classList.toggle('is-lit', item.getBoundingClientRect().top + 12 < mark));
+          };
+          addEventListener('scroll', rafThrottle(update), { passive: true });
+          update();
+        });
+
+        /* Parallax (kit/js/parallax.js) */
+        const grid = document.querySelector('[data-parallax]');
+        if (grid && !prefersReducedMotion && finePointer) {
+          const move = rafThrottle((x, y) => {
+            grid.style.translate = `${(x / innerWidth - 0.5) * 12}px ${(y / innerHeight - 0.5) * 12}px`;
+          });
+          addEventListener('pointermove', (e) => move(e.clientX, e.clientY), { passive: true });
+        }
+
+        /* Cursor (kit/js/cursor.js) */
+        if (!prefersReducedMotion && finePointer) {
+          const el = document.createElement('div');
+          el.className = 'cursor corners';
+          el.setAttribute('aria-hidden', 'true');
+          el.innerHTML = '<span class="cursor-dot"></span><span class="cursor-ext">↗</span>';
+          document.body.append(el);
+          const pointer = { x: -100, y: -100 };
+          const current = { x: -100, y: -100, w: 6, h: 6 };
+          let frame = null;
+          let mode = 'dot';
+          let running = false;
+          const target = () => {
+            if (mode === 'frame' && frame) {
+              const r = frame.getBoundingClientRect();
+              return { x: r.left - 6, y: r.top - 6, w: r.width + 12, h: r.height + 12 };
+            }
+            if (mode === 'text') return { x: pointer.x + 8, y: pointer.y - 9, w: 2, h: 18 };
+            return { x: pointer.x + 8, y: pointer.y + 8, w: 6, h: 6 };
+          };
+          const step = () => {
+            const t = target();
+            const k = mode === 'frame' ? 0.25 : 0.2;
+            current.x += (t.x - current.x) * k;
+            current.y += (t.y - current.y) * k;
+            current.w += (t.w - current.w) * 0.25;
+            current.h += (t.h - current.h) * 0.25;
+            el.style.transform = `translate(${current.x}px, ${current.y}px)`;
+            el.style.width = `${current.w}px`;
+            el.style.height = `${current.h}px`;
+            const settled = ['x', 'y', 'w', 'h'].every((key) => Math.abs(t[key] - current[key]) < 0.1);
+            running = mode === 'frame' || !settled;
+            if (running) requestAnimationFrame(step);
+          };
+          const wake = () => {
+            if (running) return;
+            running = true;
+            requestAnimationFrame(step);
+          };
+          addEventListener(
+            'pointermove',
+            (e) => {
+              pointer.x = e.clientX;
+              pointer.y = e.clientY;
+              frame = e.target.closest('[data-cursor="frame"]');
+              const external = !frame && e.target.closest('a[target="_blank"]');
+              mode = frame ? 'frame' : !external && e.target.closest('p, h1, h2, h3, li, blockquote') ? 'text' : 'dot';
+              el.classList.add('is-on');
+              el.classList.toggle('is-frame', mode === 'frame');
+              el.classList.toggle('is-text', mode === 'text');
+              el.classList.toggle('is-ext', !!external);
+              wake();
+            },
+            { passive: true },
+          );
+          addEventListener('scroll', wake, { passive: true });
+          document.addEventListener('pointerleave', () => el.classList.remove('is-on'));
+        }
+      })();
+    </script>
+  </body>
+</html>
