@@ -1,30 +1,30 @@
 # Portfolio design kit
 
-El lenguaje visual de [theboshy.github.io](https://theboshy.github.io) extraído para reutilizarlo: colores, tipografía, texturas, animaciones y componentes.
+The visual language of [theboshy.github.io](https://theboshy.github.io), extracted for reuse: colors, type, textures, motion and components.
 
-**Ver la hoja de diseño:** https://theboshy.github.io/portfolio-design-kit/ (o abre `index.html` con doble clic).
+**See the design sheet:** https://theboshy.github.io/portfolio-design-kit/ (or open `index.html` with a double click).
 
-Papel cálido, estructura con líneas de 1px, una serif para los títulos y un resaltador amarillo como único color fuerte. Modo claro y oscuro, y todo con versión `prefers-reduced-motion`.
+Warm paper, 1px hairline structure, one serif for headings and a yellow highlighter as the only loud color. Light and dark modes, and a `prefers-reduced-motion` fallback for everything.
 
-## Contenido
+## Contents
 
 ```
-index.html              la hoja de diseño, construida con el propio kit
+index.html              the design sheet, built with the kit itself
 kit/
-  tokens.css            colores claro/oscuro, easings, duraciones, radios, fuentes
-  tailwind.css          bloque @theme para Tailwind v4 (opcional)
-  base.css              body, escala tipográfica (.t-display, .t-h2, .t-body, .t-mono), layout
-  motion.css            reveal, entrada del hero, text-in, ping
-  components.css        resaltador, corner box, botones + border beam, chip, dot grid, marquee, timeline, cursor
-  reduced-motion.css    siempre al final: neutraliza cada animación
-  js/                   ES modules sin build: highlight, reveal, theme, timeline, parallax, cursor (index.js los carga todos)
+  tokens.css            light/dark colors, easings, durations, radius, fonts
+  tailwind.css          @theme block for Tailwind v4 (optional)
+  base.css              body, type scale (.t-display, .t-h2, .t-body, .t-mono), layout
+  motion.css            reveal, hero entrance, text-in, ping
+  components.css        highlighter, corner box, buttons + border beam, chip, dot grid, marquee, timeline, cursor
+  reduced-motion.css    always last: neutralizes every animation
+  js/                   build-free ES modules: highlight, reveal, theme, timeline, parallax, cursor (index.js loads them all)
 ```
 
-## Usarlo en un proyecto nuevo
+## Using it in a new project
 
-Copia `kit/` al proyecto.
+Copy `kit/` into the project.
 
-### HTML / CSS puro
+### Plain HTML / CSS
 
 ```html
 <head>
@@ -71,21 +71,21 @@ Copia `kit/` al proyecto.
 pnpm add @fontsource-variable/inter @fontsource-variable/newsreader @fontsource-variable/geist-mono
 ```
 
-## Convenciones rápidas
+## Quick conventions
 
-| Qué | Cómo |
+| What | How |
 | --- | --- |
-| Resaltador en un título | `<h2 class="t-h2" data-highlight>Texto [[resaltado]]</h2>` (lo procesa `js/highlight.js`) |
-| Sección que entra al hacer scroll | `class="reveal"` + `<html class="js">` |
-| Tarjeta con esquinas en hover | `class="cbox cbox-hover"` + `data-cursor="frame"` |
-| Grilla sin bordes dobles | `class="grid-lines"` en el contenedor |
-| Botón | `<span class="btn-wrap"><a class="btn btn-primary">…</a></span>` |
-| Cambio de tema | cualquier botón con `data-theme-toggle` |
+| Highlighter on a heading | `<h2 class="t-h2" data-highlight>Some [[highlighted]] text</h2>` (processed by `js/highlight.js`) |
+| Section that enters on scroll | `class="reveal"` + `<html class="js">` |
+| Card with hover corners | `class="cbox cbox-hover"` + `data-cursor="frame"` |
+| Grid without double borders | `class="grid-lines"` on the container |
+| Button | `<span class="btn-wrap"><a class="btn btn-primary">…</a></span>` |
+| Theme switch | any button with `data-theme-toggle` |
 
-Reglas: el amarillo en menos del ~5% de la pantalla, radios de 2px, sin sombras en tarjetas, sin em dashes en el texto (`→` para rangos de fechas).
+Rules: yellow under ~5% of the screen, 2px radii, no shadows on cards, no em dashes in copy (`→` for date ranges).
 
-Los diagramas isométricos del portfolio (SVG + GSAP) no están en el kit porque dependen de sus datos; ver `docs/isometric-diagrams.md` en el repo del portfolio.
+The portfolio's isometric diagrams (SVG + GSAP) are not part of the kit because they depend on its data; see `docs/isometric-diagrams.md` in the portfolio repo.
 
-## Licencia
+## License
 
 MIT

@@ -1,12 +1,12 @@
 <!doctype html>
-<html lang="es" data-theme="light">
+<html lang="en" data-theme="light">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Portfolio Design Kit</title>
     <meta
       name="description"
-      content="Colores, tipografía, texturas, animaciones y componentes del portfolio de Peter G. Lobo, listos para reutilizar."
+      content="Colors, type, textures, motion and components from Peter G. Lobo's portfolio, ready to reuse."
     />
     <script>
       // Theme before first paint (no flash). Follows the OS unless the visitor chose one.
@@ -442,17 +442,17 @@
     <header class="topbar">
       <div class="container-col topbar-in">
         <a class="brand" href="#top">Design kit</a>
-        <nav class="toc t-mono" aria-label="Secciones">
-          <a href="#principios">Principios</a>
+        <nav class="toc t-mono" aria-label="Sections">
+          <a href="#principles">Principles</a>
           <a href="#color">Color</a>
-          <a href="#tipografia">Tipografía</a>
-          <a href="#texturas">Texturas</a>
+          <a href="#type">Type</a>
+          <a href="#textures">Textures</a>
           <a href="#motion">Motion</a>
-          <a href="#componentes">Componentes</a>
-          <a href="#accesibilidad">Accesibilidad</a>
-          <a href="#reutilizar">Reutilizar</a>
+          <a href="#components">Components</a>
+          <a href="#accessibility">Accessibility</a>
+          <a href="#reuse">Reuse</a>
         </nav>
-        <button class="icon-btn" type="button" data-theme-toggle aria-label="Cambiar tema claro/oscuro">
+        <button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle light/dark theme">
           <svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z" /></svg>
           <svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4" /><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" /></svg>
         </button>
@@ -465,51 +465,51 @@
         <div class="dot-grid" data-parallax aria-hidden="true"></div>
         <div class="container-col hero-in stack" style="position: relative; gap: 24px">
           <p class="t-mono muted">Portfolio design kit · v1</p>
-          <h1 class="t-display" style="max-width: 17ch" data-highlight>Papel cálido, líneas finas y un [[solo resaltador]].</h1>
+          <h1 class="t-display" style="max-width: 17ch" data-highlight>Warm paper, hairlines and [[one highlighter]].</h1>
           <p class="t-body" style="max-width: 52ch; font-size: 16px">
-            Todo el lenguaje visual del portfolio en una hoja: colores, tipografía, texturas, animaciones y componentes.
-            Cada pieza está viva en esta página y el CSS que la produce está en <code>kit/</code>, listo para copiar a un proyecto nuevo.
+            The whole visual language of the portfolio on one sheet: colors, type, textures, motion and components.
+            Every piece is live on this page, and the CSS behind it lives in <code>kit/</code>, ready to copy into a new project.
           </p>
           <div class="row" style="margin-left: -4px">
             <span class="btn-wrap" data-cursor="frame">
-              <a class="btn btn-primary" href="#reutilizar"><span class="beam" aria-hidden="true"></span>Cómo reutilizarlo</a>
+              <a class="btn btn-primary" href="#reuse"><span class="beam" aria-hidden="true"></span>How to reuse it</a>
             </span>
             <span class="btn-wrap" data-cursor="frame">
-              <a class="btn" href="https://github.com/theboshy/portfolio-design-kit" target="_blank" rel="noopener noreferrer">Repo en GitHub <span class="arrow" aria-hidden="true">↗</span></a>
+              <a class="btn" href="https://github.com/theboshy/portfolio-design-kit" target="_blank" rel="noopener noreferrer">Repo on GitHub <span class="arrow" aria-hidden="true">↗</span></a>
             </span>
           </div>
         </div>
       </section>
 
-      <!-- 1. Principios -->
-      <section id="principios" class="section container-col reveal">
+      <!-- 1. Principles -->
+      <section id="principles" class="section container-col reveal">
         <div class="stack">
-          <p class="t-mono muted">01 · Principios</p>
-          <h2 class="t-h2" data-highlight>La profundidad sale de las [[líneas]], no de las sombras.</h2>
+          <p class="t-mono muted">01 · Principles</p>
+          <h2 class="t-h2" data-highlight>Depth comes from [[lines]], not shadows.</h2>
           <p class="t-body">
-            Una superficie de papel cálido, estructura hecha con hairlines de 1px, una serif editorial para los títulos
-            y el amarillo resaltador como único color fuerte. El modo oscuro es su propia escala, no una inversión.
+            A warm paper surface, structure drawn with 1px hairlines, an editorial serif for headings
+            and the yellow highlighter as the only loud color. Dark mode is its own set of steps, not an inversion.
           </p>
         </div>
         <div class="grid grid-lines mt-10" style="--min: 240px">
           <div class="cbox cbox-hover pad stack" data-cursor="frame" style="gap: 8px">
             <p class="t-mono muted">Color</p>
-            <p class="t-body">El amarillo ocupa menos del ~5% de cualquier pantalla: el marcador de los títulos, el botón primario, la selección y los estados activos.</p>
+            <p class="t-body">Yellow stays under ~5% of any screen: the heading marker, the primary button, selection and active states.</p>
           </div>
           <div class="cbox cbox-hover pad stack" data-cursor="frame" style="gap: 8px">
-            <p class="t-mono muted">Estructura</p>
-            <p class="t-body">Radios casi cuadrados (2px). Las tarjetas no tienen sombra. Las cajas vecinas comparten borde, así una grilla se lee como un solo dibujo de líneas.</p>
+            <p class="t-mono muted">Structure</p>
+            <p class="t-body">Almost square radii (2px). Cards have no shadow. Adjacent boxes share their border, so a grid reads as one continuous line drawing.</p>
           </div>
           <div class="cbox cbox-hover pad stack" data-cursor="frame" style="gap: 8px">
             <p class="t-mono muted">Motion</p>
-            <p class="t-body">Corto, con easing y siempre como respuesta a algo: 200ms para hovers y 700ms para lo que entra en pantalla. Todo tiene versión reduced motion.</p>
+            <p class="t-body">Short, eased and always a response to something: 200ms for hovers, 700ms for things entering the viewport. Everything has a reduced motion fallback.</p>
           </div>
           <div class="cbox cbox-hover pad stack" data-cursor="frame" style="gap: 8px">
-            <p class="t-mono muted">Escritura</p>
+            <p class="t-mono muted">Writing</p>
             <ul class="rules">
-              <li>Sin em dashes ni divisores punteados: dos puntos, paréntesis, puntos.</li>
-              <li><code>→</code> para rangos de fechas.</li>
-              <li>Emojis como acento: máximo uno por bloque, solo en etiquetas.</li>
+              <li>No em dashes and no dashed dividers: colons, parentheses, periods.</li>
+              <li><code>→</code> for date ranges.</li>
+              <li>Emojis are accents: at most one per block, only in labels.</li>
             </ul>
           </div>
         </div>
@@ -519,21 +519,21 @@
       <section id="color" class="section container-col reveal">
         <div class="stack">
           <p class="t-mono muted">02 · Color</p>
-          <h2 class="t-h2" data-highlight>Tokens para [[claro y oscuro]].</h2>
+          <h2 class="t-h2" data-highlight>Tokens for [[light and dark]].</h2>
           <p class="t-body">
-            Clic en una muestra para copiar <code>var(--token)</code>. La muestra refleja el tema activo; los dos valores
-            están abajo. En los tokens de texto, el badge muestra el contraste real contra <code>--surface-bg</code> en el tema actual.
+            Click a swatch to copy <code>var(--token)</code>. The swatch follows the active theme; both values
+            are listed below it. On text tokens, the badge shows the live contrast against <code>--surface-bg</code> in the current theme.
           </p>
         </div>
         <div data-swatches></div>
       </section>
 
-      <!-- 3. Tipografía -->
-      <section id="tipografia" class="section container-col reveal">
+      <!-- 3. Type -->
+      <section id="type" class="section container-col reveal">
         <div class="stack">
-          <p class="t-mono muted">03 · Tipografía</p>
-          <h2 class="t-h2" data-highlight>Una serif, una sans y una [[mono]].</h2>
-          <p class="t-body">Las tres son variables. En el portfolio se sirven desde el propio sitio con @fontsource; aquí vienen de Google Fonts.</p>
+          <p class="t-mono muted">03 · Type</p>
+          <h2 class="t-h2" data-highlight>One serif, one sans, one [[mono]].</h2>
+          <p class="t-body">All three are variable fonts. The portfolio self-hosts them with @fontsource; this sheet loads them from Google Fonts.</p>
         </div>
         <div class="grid grid-lines mt-10" style="--min: 230px">
           <div class="cbox cbox-hover pad stack" data-cursor="frame" style="gap: 12px">
@@ -542,7 +542,7 @@
               <p style="font-weight: 500">Newsreader</p>
               <p class="t-mono muted">--font-serif · 200→800 · opsz 6→72</p>
             </div>
-            <p class="t-body">Títulos. Serif editorial con tamaños ópticos: se ajusta sola entre display y texto.</p>
+            <p class="t-body">Headings. An editorial serif with optical sizes: it adapts itself between display and text.</p>
           </div>
           <div class="cbox cbox-hover pad stack" data-cursor="frame" style="gap: 12px">
             <p class="aa" style="font-family: var(--font-sans); font-weight: 450">Aa</p>
@@ -550,7 +550,7 @@
               <p style="font-weight: 500">Inter</p>
               <p class="t-mono muted">--font-sans · 100→900</p>
             </div>
-            <p class="t-body">Cuerpo e interfaz. 15px, interlineado 150%, tracking −0.075px.</p>
+            <p class="t-body">Body and UI. 15px, 150% line height, −0.075px tracking.</p>
           </div>
           <div class="cbox cbox-hover pad stack" data-cursor="frame" style="gap: 12px">
             <p class="aa" style="font-family: var(--font-mono)">Aa</p>
@@ -558,64 +558,64 @@
               <p style="font-weight: 500">Geist Mono</p>
               <p class="t-mono muted">--font-mono · 100→900</p>
             </div>
-            <p class="t-body">Etiquetas, datos y código. 11–12px, en mayúsculas para los eyebrows.</p>
+            <p class="t-body">Labels, data and code. 11–12px, uppercase for eyebrows.</p>
           </div>
         </div>
 
-        <h3 class="t-mono muted sub">Escala</h3>
+        <h3 class="t-mono muted sub">Scale</h3>
         <div>
           <div class="scale-row">
             <p class="t-mono muted">.t-display<br />serif 450 · clamp(40px, 7vw, 60px) · 1.04 · −0.02em</p>
-            <p class="t-display" data-highlight>Sistemas que [[aguantan]].</p>
+            <p class="t-display" data-highlight>Systems that [[hold up]].</p>
           </div>
           <div class="scale-row">
             <p class="t-mono muted">.t-h2<br />serif 500 · 32px · 1.15</p>
-            <p class="t-h2" data-highlight>Cómo [[trabajo]] en equipo</p>
+            <p class="t-h2" data-highlight>How I [[work]] with teams</p>
           </div>
           <div class="scale-row">
-            <p class="t-mono muted">h3 de tarjeta<br />sans 500 · 17px · −0.01em</p>
+            <p class="t-mono muted">card h3<br />sans 500 · 17px · −0.01em</p>
             <p style="font-size: 17px; font-weight: 500; letter-spacing: -0.01em">Payments platform</p>
           </div>
           <div class="scale-row">
             <p class="t-mono muted">body<br />sans 400 · 15px · 1.5</p>
-            <p style="color: var(--text-primary)">Construyo servicios que se entienden, se miden y se pueden cambiar sin miedo.</p>
+            <p style="color: var(--text-primary)">I build services that are easy to understand, measure and change without fear.</p>
           </div>
           <div class="scale-row">
-            <p class="t-mono muted">.t-body<br />--text-tertiary · máx 64ch</p>
-            <p class="t-body">El párrafo secundario de cada sección: más claro y con una medida de línea cómoda para leer.</p>
+            <p class="t-mono muted">.t-body<br />--text-tertiary · max 64ch</p>
+            <p class="t-body">The supporting paragraph in every section: lighter, with a comfortable line length.</p>
           </div>
           <div class="scale-row">
-            <p class="t-mono muted">.t-mono<br />mono 12px · 0.04em · mayúsculas</p>
-            <p class="t-mono muted">Experiencia · 2019 → hoy</p>
+            <p class="t-mono muted">.t-mono<br />mono 12px · 0.04em · uppercase</p>
+            <p class="t-mono muted">Experience · 2019 → now</p>
           </div>
           <div class="scale-row">
-            <p class="t-mono muted">.link<br />--text-link · subrayado 1px, offset 3px</p>
-            <p><a class="link" href="#top">Un enlace dentro del texto</a></p>
+            <p class="t-mono muted">.link<br />--text-link · 1px underline, 3px offset</p>
+            <p><a class="link" href="#top">A link inside body text</a></p>
           </div>
         </div>
       </section>
 
-      <!-- 4. Texturas -->
-      <section id="texturas" class="section container-col reveal">
+      <!-- 4. Textures -->
+      <section id="textures" class="section container-col reveal">
         <div class="stack">
-          <p class="t-mono muted">04 · Texturas y estructura</p>
-          <h2 class="t-h2" data-highlight>Todo se dibuja con [[1px]].</h2>
-          <p class="t-body">Pasa el mouse por encima de cada panel. Las texturas son CSS puro: gradientes, máscaras y pseudo-elementos, sin imágenes.</p>
+          <p class="t-mono muted">04 · Textures and structure</p>
+          <h2 class="t-h2" data-highlight>Everything is drawn with [[1px]].</h2>
+          <p class="t-body">Hover each panel. The textures are pure CSS: gradients, masks and pseudo-elements, no images.</p>
         </div>
         <div class="grid grid-lines mt-10" style="--min: 240px">
           <figure class="cbox">
             <div class="panel"><div class="dot-grid" aria-hidden="true"></div></div>
-            <figcaption class="caption"><p class="t-mono">.dot-grid</p><p class="swatch-use">Puntos de 1px cada 24px que derivan en 24s. En el hero lleva una máscara radial y parallax con el puntero.</p></figcaption>
+            <figcaption class="caption"><p class="t-mono">.dot-grid</p><p class="swatch-use">1px dots every 24px, drifting over 24s. In the hero it gets a radial mask and pointer parallax.</p></figcaption>
           </figure>
           <figure class="cbox">
             <div class="panel cbox-hover is-active" style="position: relative; isolation: isolate"></div>
-            <figcaption class="caption"><p class="t-mono">Rayas 315°</p><p class="swatch-use">El fondo de <code>.cbox-hover</code> en hover: rayas de 2px al 14% de <code>--line-strong</code>.</p></figcaption>
+            <figcaption class="caption"><p class="t-mono">315° stripes</p><p class="swatch-use">The hover background of <code>.cbox-hover</code>: 2px stripes at 14% of <code>--line-strong</code>.</p></figcaption>
           </figure>
           <figure class="cbox">
             <div class="panel" style="display: grid; place-items: center">
               <div class="corners is-active" style="position: relative; width: 96px; height: 56px; border: 1px solid var(--line-structure)"></div>
             </div>
-            <figcaption class="caption"><p class="t-mono">Esquinas de corchete</p><p class="swatch-use">Un solo pseudo-elemento con 8 gradientes. Compartido por tarjetas, botones y el cursor.</p></figcaption>
+            <figcaption class="caption"><p class="t-mono">Bracket corners</p><p class="swatch-use">One pseudo-element with 8 gradients, shared by cards, buttons and the cursor.</p></figcaption>
           </figure>
           <figure class="cbox">
             <div class="panel" style="display: grid; place-items: center; padding: 20px">
@@ -624,19 +624,19 @@
                 <div class="cbox" style="height: 40px"></div><div class="cbox" style="height: 40px"></div><div class="cbox" style="height: 40px"></div>
               </div>
             </div>
-            <figcaption class="caption"><p class="t-mono">.grid-lines</p><p class="swatch-use">Cada hijo se solapa 1px con el vecino: nunca hay bordes dobles.</p></figcaption>
+            <figcaption class="caption"><p class="t-mono">.grid-lines</p><p class="swatch-use">Each child overlaps its neighbor by 1px: borders never double up.</p></figcaption>
           </figure>
         </div>
         <div class="table-wrap mt-10">
           <table class="table">
-            <thead><tr><th>Token / valor</th><th>Uso</th></tr></thead>
+            <thead><tr><th>Token / value</th><th>Use</th></tr></thead>
             <tbody>
-              <tr><td><code>--radius: 2px</code></td><td>Botones, tarjetas, chips. Solo los pills de estado son redondos.</td></tr>
-              <tr><td><code>--shadow-button</code></td><td>La única sombra del sistema, suave y solo en botones. Desaparece al presionar.</td></tr>
-              <tr><td><code>--line-structure</code></td><td>Todos los bordes y la grilla compartida.</td></tr>
-              <tr><td><code>--line-strong</code></td><td>Bordes en hover y esquinas de corchete.</td></tr>
-              <tr><td>Columna 680px / 840px (≥1280)</td><td><code>.container-col</code>; gutters de 16px en móvil y 32px desde 640px.</td></tr>
-              <tr><td>Secciones 120px / 80px</td><td><code>.section</code>: separación vertical en desktop / móvil.</td></tr>
+              <tr><td><code>--radius: 2px</code></td><td>Buttons, cards, chips. Only status pills are round.</td></tr>
+              <tr><td><code>--shadow-button</code></td><td>The only shadow in the system: soft, buttons only. It goes away on press.</td></tr>
+              <tr><td><code>--line-structure</code></td><td>Every border and the shared grid.</td></tr>
+              <tr><td><code>--line-strong</code></td><td>Hover borders and bracket corners.</td></tr>
+              <tr><td>Column 680px / 840px (≥1280)</td><td><code>.container-col</code>; 16px gutters on phones, 32px from 640px.</td></tr>
+              <tr><td>Sections 120px / 80px</td><td><code>.section</code>: vertical spacing on desktop / phones.</td></tr>
             </tbody>
           </table>
         </div>
@@ -646,140 +646,140 @@
       <section id="motion" class="section container-col reveal">
         <div class="stack">
           <p class="t-mono muted">05 · Motion</p>
-          <h2 class="t-h2" data-highlight>Corto, con easing y siempre [[como respuesta]].</h2>
-          <p class="t-body">Tres curvas y dos duraciones cubren casi todo. Cada tarjeta de abajo tiene un botón para repetir la animación y el código que la produce.</p>
+          <h2 class="t-h2" data-highlight>Short, eased and always [[a response]].</h2>
+          <p class="t-body">Three curves and two durations cover almost everything. Each card below has a replay button and the code that produces it.</p>
         </div>
 
         <h3 class="t-mono muted sub">Easings</h3>
         <div class="cbox" data-easing>
           <div class="card-head">
-            <p class="swatch-use" style="margin: 0">Mostradas a 1s para que se aprecien; las duraciones reales están en la tabla de abajo.</p>
-            <span class="btn-wrap" data-cursor="frame"><button class="btn" type="button" data-easing-play>Reproducir</button></span>
+            <p class="swatch-use" style="margin: 0">Shown at 1s so you can see them; the real durations are in the table below.</p>
+            <span class="btn-wrap" data-cursor="frame"><button class="btn" type="button" data-easing-play>Play</button></span>
           </div>
           <div class="ease-row">
-            <div><p class="t-mono">standard</p><p class="swatch-vals">--ease-standard · cubic-bezier(.25,.1,.25,1)</p><p class="swatch-use">Reveals de sección</p></div>
+            <div><p class="t-mono">standard</p><p class="swatch-vals">--ease-standard · cubic-bezier(.25,.1,.25,1)</p><p class="swatch-use">Section reveals</p></div>
             <div class="track"><span class="ball" style="transition: left 1s var(--ease-standard)"></span></div>
           </div>
           <div class="ease-row">
-            <div><p class="t-mono">out-expo</p><p class="swatch-vals">--ease-out-expo · cubic-bezier(.16,1,.3,1)</p><p class="swatch-use">Texto, paneles, resaltador, esquinas</p></div>
+            <div><p class="t-mono">out-expo</p><p class="swatch-vals">--ease-out-expo · cubic-bezier(.16,1,.3,1)</p><p class="swatch-use">Text, panels, highlighter, corners</p></div>
             <div class="track"><span class="ball" style="transition: left 1s var(--ease-out-expo)"></span></div>
           </div>
           <div class="ease-row">
-            <div><p class="t-mono">spring</p><p class="swatch-vals">GSAP back.out(1.4) ≈ cubic-bezier(.34,1.4,.64,1)</p><p class="swatch-use">Cajas isométricas que suben en hover</p></div>
+            <div><p class="t-mono">spring</p><p class="swatch-vals">GSAP back.out(1.4) ≈ cubic-bezier(.34,1.4,.64,1)</p><p class="swatch-use">Isometric boxes rising on hover</p></div>
             <div class="track"><span class="ball" style="transition: left 1s cubic-bezier(0.34, 1.4, 0.64, 1)"></span></div>
           </div>
         </div>
         <div class="table-wrap">
           <table class="table" style="margin-top: 24px">
-            <thead><tr><th>Duración</th><th>Uso</th></tr></thead>
+            <thead><tr><th>Duration</th><th>Use</th></tr></thead>
             <tbody>
-              <tr><td><code>--dur-hover: 200ms</code></td><td>Hovers, colores de borde, esquinas, text-in</td></tr>
-              <tr><td><code>--dur-enter: 700ms</code></td><td>Lo que entra en el viewport (reveal, hero)</td></tr>
-              <tr><td>450ms + 90ms por palabra</td><td>La pintura del resaltador</td></tr>
-              <tr><td>6s · 24s · 40s</td><td>Loops ambientales: border-beam, dot-grid, marquee</td></tr>
+              <tr><td><code>--dur-hover: 200ms</code></td><td>Hovers, border colors, corners, text-in</td></tr>
+              <tr><td><code>--dur-enter: 700ms</code></td><td>Things entering the viewport (reveal, hero)</td></tr>
+              <tr><td>450ms + 90ms per word</td><td>The highlighter paint</td></tr>
+              <tr><td>6s · 24s · 40s</td><td>Ambient loops: border-beam, dot-grid, marquee</td></tr>
             </tbody>
           </table>
         </div>
 
-        <h3 class="t-mono muted sub">Animaciones</h3>
+        <h3 class="t-mono muted sub">Animations</h3>
         <div class="grid grid-lines" style="--min: 300px">
           <article class="cbox card" data-replay="visible">
             <div class="card-head">
-              <div><h3>Resaltador</h3><p>El marcador amarillo se pinta palabra por palabra detrás del título.</p></div>
-              <button class="btn" type="button" data-replay-btn>Repetir</button>
+              <div><h3>Highlighter</h3><p>The yellow marker paints itself word by word behind the heading.</p></div>
+              <button class="btn" type="button" data-replay-btn>Replay</button>
             </div>
             <div class="stage">
-<h2 class="t-h2" data-hl-wait data-highlight>Sistemas que [[aguantan en producción]]</h2>
+<h2 class="t-h2" data-hl-wait data-highlight>Systems that [[hold up in production]]</h2>
             </div>
             <dl class="specs">
-              <dt>Disparo</dt><dd>Con el reveal de la sección (o <code>.is-visible</code> en un <code>[data-hl-wait]</code>)</dd>
-              <dt>Motion</dt><dd>scaleX(0 → 1), 450ms out-expo, 90ms de escalonado por palabra</dd>
-              <dt>Archivos</dt><dd>components.css · js/highlight.js</dd>
+              <dt>Trigger</dt><dd>With the section reveal (or <code>.is-visible</code> on a <code>[data-hl-wait]</code>)</dd>
+              <dt>Motion</dt><dd>scaleX(0 → 1), 450ms out-expo, 90ms stagger per word</dd>
+              <dt>Files</dt><dd>components.css · js/highlight.js</dd>
             </dl>
-            <details class="code"><summary>Código</summary></details>
+            <details class="code"><summary>Code</summary></details>
           </article>
 
           <article class="cbox card" data-replay="visible">
             <div class="card-head">
-              <div><h3>Reveal de sección</h3><p>Sube 16px y aparece la primera vez que entra en pantalla.</p></div>
-              <button class="btn" type="button" data-replay-btn>Repetir</button>
+              <div><h3>Section reveal</h3><p>Rises 16px and fades in the first time it enters the viewport.</p></div>
+              <button class="btn" type="button" data-replay-btn>Replay</button>
             </div>
             <div class="stage">
 <div class="reveal stack" style="gap: 8px">
   <p class="t-mono muted">Eyebrow</p>
-  <p class="t-h2">Una sección entrando</p>
+  <p class="t-h2">A section coming in</p>
 </div>
             </div>
             <dl class="specs">
-              <dt>Disparo</dt><dd>15% visible, una sola vez (IntersectionObserver)</dd>
+              <dt>Trigger</dt><dd>15% visible, once (IntersectionObserver)</dd>
               <dt>Motion</dt><dd>opacity + translateY(16px), 700ms standard</dd>
-              <dt>Archivos</dt><dd>motion.css · js/reveal.js · requiere <code>&lt;html class="js"&gt;</code></dd>
+              <dt>Files</dt><dd>motion.css · js/reveal.js · requires <code>&lt;html class="js"&gt;</code></dd>
             </dl>
-            <details class="code"><summary>Código</summary></details>
+            <details class="code"><summary>Code</summary></details>
           </article>
 
           <article class="cbox card" data-replay="anim">
             <div class="card-head">
-              <div><h3>Entrada del hero</h3><p>La misma subida que el reveal, pero solo con CSS para que empiece en el primer paint.</p></div>
-              <button class="btn" type="button" data-replay-btn>Repetir</button>
+              <div><h3>Hero entrance</h3><p>The same rise as the reveal, but CSS-only so it starts on first paint.</p></div>
+              <button class="btn" type="button" data-replay-btn>Replay</button>
             </div>
             <div class="stage">
 <div class="hero-in stack" data-anim="hero-in" style="gap: 8px">
-  <p class="t-mono muted">Hola, soy</p>
-  <p class="t-h2" data-highlight>Hero con [[resaltador]]</p>
+  <p class="t-mono muted">Hi, I'm</p>
+  <p class="t-h2" data-highlight>Hero with a [[highlighter]]</p>
 </div>
             </div>
             <dl class="specs">
-              <dt>Disparo</dt><dd>Primer paint (keyframes, sin JS: no retrasa el LCP)</dd>
-              <dt>Motion</dt><dd><code>rise</code> 700ms + <code>paint</code> 450ms tras 350ms</dd>
-              <dt>Archivos</dt><dd>motion.css</dd>
+              <dt>Trigger</dt><dd>First paint (keyframes, no JS, so it doesn't delay LCP)</dd>
+              <dt>Motion</dt><dd><code>rise</code> 700ms + <code>paint</code> 450ms after 350ms</dd>
+              <dt>Files</dt><dd>motion.css</dd>
             </dl>
-            <details class="code"><summary>Código</summary></details>
+            <details class="code"><summary>Code</summary></details>
           </article>
 
           <article class="cbox card" data-replay="anim">
             <div class="card-head">
-              <div><h3>text-in</h3><p>Cuando cambia el contenido de un panel, cada hijo sube 6px y aparece.</p></div>
-              <button class="btn" type="button" data-replay-btn>Repetir</button>
+              <div><h3>text-in</h3><p>When a panel's content changes, each child rises 6px and fades in.</p></div>
+              <button class="btn" type="button" data-replay-btn>Replay</button>
             </div>
             <div class="stage">
 <div class="text-in stack" data-anim="text-in" style="gap: 6px">
   <p class="t-mono muted">API gateway</p>
-  <p style="font-weight: 500">Enruta y limita el tráfico</p>
-  <p class="t-body">Tercer hijo, 100ms después.</p>
+  <p style="font-weight: 500">Routes and rate-limits traffic</p>
+  <p class="t-body">Third child, 100ms later.</p>
 </div>
             </div>
             <dl class="specs">
-              <dt>Disparo</dt><dd>Al re-renderizar el contenido del panel</dd>
-              <dt>Motion</dt><dd>200ms out-expo, 50ms de escalonado</dd>
-              <dt>Archivos</dt><dd>motion.css</dd>
+              <dt>Trigger</dt><dd>When the panel content re-renders</dd>
+              <dt>Motion</dt><dd>200ms out-expo, 50ms stagger</dd>
+              <dt>Files</dt><dd>motion.css</dd>
             </dl>
-            <details class="code"><summary>Código</summary></details>
+            <details class="code"><summary>Code</summary></details>
           </article>
 
           <article class="cbox card">
             <div class="card-head">
-              <div><h3>Border beam</h3><p>Un punto de luz recorre el borde del CTA principal. Solo uno por pantalla.</p></div>
+              <div><h3>Border beam</h3><p>A spot of light travels around the primary CTA's border. One per screen.</p></div>
             </div>
             <div class="stage">
 <span class="btn-wrap" data-cursor="frame">
   <a class="btn btn-primary" href="#motion">
     <span class="beam" aria-hidden="true"></span>
-    Acción principal
+    Primary action
   </a>
 </span>
             </div>
             <dl class="specs">
-              <dt>Disparo</dt><dd>Siempre</dd>
-              <dt>Motion</dt><dd><code>offset-path: rect()</code> alrededor del botón, 6s lineal</dd>
-              <dt>Archivos</dt><dd>components.css</dd>
+              <dt>Trigger</dt><dd>Always</dd>
+              <dt>Motion</dt><dd><code>offset-path: rect()</code> around the button, 6s linear</dd>
+              <dt>Files</dt><dd>components.css</dd>
             </dl>
-            <details class="code"><summary>Código</summary></details>
+            <details class="code"><summary>Code</summary></details>
           </article>
 
           <article class="cbox card">
             <div class="card-head">
-              <div><h3>Marquee</h3><p>Una cinta de logos que se detiene en hover. El contenido va duplicado para cerrar el loop.</p></div>
+              <div><h3>Marquee</h3><p>A logo strip that pauses on hover. The content is duplicated to close the loop.</p></div>
             </div>
             <div class="stage" style="padding-inline: 0">
 <div class="marquee cbox" style="width: 100%; padding-block: 16px" aria-hidden="true">
@@ -799,16 +799,16 @@
 </div>
             </div>
             <dl class="specs">
-              <dt>Disparo</dt><dd>Siempre; pausa en hover</dd>
-              <dt>Motion</dt><dd>translateX(0 → −50%), 40s lineal, máscara con fade de 64px</dd>
-              <dt>Archivos</dt><dd>components.css</dd>
+              <dt>Trigger</dt><dd>Always; pauses on hover</dd>
+              <dt>Motion</dt><dd>translateX(0 → −50%), 40s linear, 64px fade mask</dd>
+              <dt>Files</dt><dd>components.css</dd>
             </dl>
-            <details class="code"><summary>Código</summary></details>
+            <details class="code"><summary>Code</summary></details>
           </article>
 
           <article class="cbox card">
             <div class="card-head">
-              <div><h3>Ping</h3><p>Un indicador de estado que late. Solo en pills de estado.</p></div>
+              <div><h3>Ping</h3><p>A pulsing status indicator. Status pills only.</p></div>
             </div>
             <div class="stage">
 <span class="chip" style="gap: 8px">
@@ -816,70 +816,70 @@
     <span class="ping" style="position: absolute; inset: 0; border-radius: 999px; background: var(--accent-green); opacity: 0.6"></span>
     <span style="position: relative; width: 7px; height: 7px; border-radius: 999px; background: var(--accent-green)"></span>
   </span>
-  En producción
+  In production
 </span>
             </div>
             <dl class="specs">
-              <dt>Disparo</dt><dd>Siempre</dd>
+              <dt>Trigger</dt><dd>Always</dd>
               <dt>Motion</dt><dd>scale(2.2) + fade, 2s, cubic-bezier(0,0,.2,1)</dd>
-              <dt>Archivos</dt><dd>motion.css</dd>
+              <dt>Files</dt><dd>motion.css</dd>
             </dl>
-            <details class="code"><summary>Código</summary></details>
+            <details class="code"><summary>Code</summary></details>
           </article>
 
           <article class="cbox card">
             <div class="card-head">
-              <div><h3>Corner box</h3><p>En hover o foco aparecen cuatro esquinas por fuera y el fondo se vuelve rayado.</p></div>
+              <div><h3>Corner box</h3><p>On hover or focus, four corners appear just outside and the background turns striped.</p></div>
             </div>
             <div class="stage">
 <article class="cbox cbox-hover" data-cursor="frame" tabindex="0" style="padding: 16px; width: 240px">
-  <p style="font-weight: 500">Pasa el mouse <span class="arrow" style="display: inline-block">→</span></p>
+  <p style="font-weight: 500">Hover me <span class="arrow" style="display: inline-block">→</span></p>
   <p class="t-mono muted" style="margin-top: 6px">.cbox .cbox-hover</p>
 </article>
             </div>
             <dl class="specs">
-              <dt>Disparo</dt><dd>Hover, foco o <code>.is-active</code></dd>
-              <dt>Motion</dt><dd>inset −3px → −5px, 200ms out-expo; rayas con fade de 180ms</dd>
-              <dt>Archivos</dt><dd>components.css</dd>
+              <dt>Trigger</dt><dd>Hover, focus or <code>.is-active</code></dd>
+              <dt>Motion</dt><dd>inset −3px → −5px, 200ms out-expo; stripes fade in over 180ms</dd>
+              <dt>Files</dt><dd>components.css</dd>
             </dl>
-            <details class="code"><summary>Código</summary></details>
+            <details class="code"><summary>Code</summary></details>
           </article>
 
           <article class="cbox card">
             <div class="card-head">
-              <div><h3>Cursor</h3><p>Un punto sigue al cursor nativo (que nunca se oculta). Sobre texto es un caret amarillo; sobre <code>[data-cursor="frame"]</code>, un marco de esquinas.</p></div>
+              <div><h3>Cursor</h3><p>A dot trails the native cursor (which is never hidden). Over text it becomes a yellow caret; over <code>[data-cursor="frame"]</code>, a corner frame.</p></div>
             </div>
             <div class="stage" style="gap: 16px">
 <div class="stack" style="align-items: center">
-  <p>Pasa sobre este texto</p>
-  <span class="chip" data-cursor="frame">y sobre este chip</span>
+  <p>Hover this text</p>
+  <span class="chip" data-cursor="frame">and this chip</span>
 </div>
             </div>
             <dl class="specs">
-              <dt>Disparo</dt><dd>Movimiento del puntero, solo punteros finos</dd>
-              <dt>Motion</dt><dd>Persigue al objetivo con factor 0.2 por frame; el loop de rAF duerme al asentarse</dd>
-              <dt>Archivos</dt><dd>components.css · js/cursor.js</dd>
+              <dt>Trigger</dt><dd>Pointer moves, fine pointers only</dd>
+              <dt>Motion</dt><dd>Chases its target by 0.2 per frame; the rAF loop sleeps once settled</dd>
+              <dt>Files</dt><dd>components.css · js/cursor.js</dd>
             </dl>
-            <details class="code"><summary>Código</summary></details>
+            <details class="code"><summary>Code</summary></details>
           </article>
 
           <article class="cbox card">
             <div class="card-head">
-              <div><h3>Cambio de tema</h3><p>El tema nuevo crece como un círculo desde el botón (View Transitions API).</p></div>
+              <div><h3>Theme switch</h3><p>The new theme grows as a circle from the button (View Transitions API).</p></div>
             </div>
             <div class="stage">
-<button class="icon-btn" type="button" data-theme-toggle aria-label="Cambiar tema">◐</button>
+<button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle theme">◐</button>
             </div>
             <dl class="specs">
-              <dt>Disparo</dt><dd>Clic en <code>[data-theme-toggle]</code>; se guarda en localStorage</dd>
-              <dt>Motion</dt><dd>clip-path circle(0 → radio), 500ms out-expo</dd>
-              <dt>Archivos</dt><dd>tokens.css · js/theme.js</dd>
+              <dt>Trigger</dt><dd>Click on <code>[data-theme-toggle]</code>; saved to localStorage</dd>
+              <dt>Motion</dt><dd>clip-path circle(0 → radius), 500ms out-expo</dd>
+              <dt>Files</dt><dd>tokens.css · js/theme.js</dd>
             </dl>
-            <details class="code"><summary>Código</summary></details>
+            <details class="code"><summary>Code</summary></details>
           </article>
         </div>
 
-        <h3 class="t-mono muted sub">Timeline que se dibuja con el scroll</h3>
+        <h3 class="t-mono muted sub">Timeline drawn on scroll</h3>
         <article class="cbox card">
           <div class="stage" style="display: block; padding: 24px">
 <ol class="tl" data-timeline>
@@ -887,7 +887,7 @@
   <span class="tl-line" aria-hidden="true"></span>
   <li class="tl-item">
     <span class="tl-dot" aria-hidden="true"></span>
-    <p class="t-mono muted">2024 → hoy</p>
+    <p class="t-mono muted">2024 → now</p>
     <div class="cbox cbox-hover" data-cursor="frame" style="margin-top: 8px; padding: 16px">Senior Software Engineer</div>
   </li>
   <li class="tl-item">
@@ -903,63 +903,63 @@
 </ol>
           </div>
           <dl class="specs">
-            <dt>Disparo</dt><dd>Scroll: el "lápiz" está al 60% del alto de la ventana</dd>
-            <dt>Motion</dt><dd>scaleY(<code>--tl-progress</code>) en la línea; cada punto se enciende al alcanzarlo (300ms)</dd>
-            <dt>Archivos</dt><dd>components.css · js/timeline.js</dd>
+            <dt>Trigger</dt><dd>Scroll: the "pen" sits at 60% of the viewport height</dd>
+            <dt>Motion</dt><dd>scaleY(<code>--tl-progress</code>) on the line; each dot lights up when reached (300ms)</dd>
+            <dt>Files</dt><dd>components.css · js/timeline.js</dd>
           </dl>
-          <details class="code"><summary>Código</summary></details>
+          <details class="code"><summary>Code</summary></details>
         </article>
       </section>
 
-      <!-- 6. Componentes -->
-      <section id="componentes" class="section container-col reveal">
+      <!-- 6. Components -->
+      <section id="components" class="section container-col reveal">
         <div class="stack">
-          <p class="t-mono muted">06 · Componentes</p>
-          <h2 class="t-h2" data-highlight>Piezas pequeñas, [[una sola regla]] de bordes.</h2>
-          <p class="t-body">El HTML de cada uno está listo para copiar. En el portfolio son componentes de Astro con la misma estructura.</p>
+          <p class="t-mono muted">06 · Components</p>
+          <h2 class="t-h2" data-highlight>Small pieces, [[one border rule]].</h2>
+          <p class="t-body">Each one's HTML is ready to copy. In the portfolio they are Astro components with the same structure.</p>
         </div>
         <div class="grid grid-lines mt-10" style="--min: 300px">
           <article class="cbox card">
-            <div class="card-head"><div><h3>Button</h3><p>32px de alto, radio 2px, sombra suave y marco de esquinas en hover. El primario usa <code>--cta</code>.</p></div></div>
+            <div class="card-head"><div><h3>Button</h3><p>32px tall, 2px radius, soft shadow and a corner frame on hover. The primary one uses <code>--cta</code>.</p></div></div>
             <div class="stage">
 <div class="row">
   <span class="btn-wrap" data-cursor="frame">
-    <a class="btn btn-primary" href="#componentes">Primario</a>
+    <a class="btn btn-primary" href="#components">Primary</a>
   </span>
   <span class="btn-wrap" data-cursor="frame">
-    <a class="btn" href="#componentes">Secundario <span class="arrow" aria-hidden="true">→</span></a>
+    <a class="btn" href="#components">Secondary <span class="arrow" aria-hidden="true">→</span></a>
   </span>
 </div>
             </div>
-            <details class="code"><summary>Código</summary></details>
+            <details class="code"><summary>Code</summary></details>
           </article>
 
           <article class="cbox card">
-            <div class="card-head"><div><h3>Chip</h3><p>Tag mono de 11px con borde fino, para stacks y estados.</p></div></div>
+            <div class="card-head"><div><h3>Chip</h3><p>An 11px mono tag with a hairline border, for stacks and statuses.</p></div></div>
             <div class="stage">
 <div class="row" style="gap: 6px">
   <span class="chip">TypeScript</span>
   <span class="chip">Kafka</span>
-  <span class="chip">🔒 Privado</span>
+  <span class="chip">🔒 Private</span>
 </div>
             </div>
-            <details class="code"><summary>Código</summary></details>
+            <details class="code"><summary>Code</summary></details>
           </article>
 
           <article class="cbox card">
-            <div class="card-head"><div><h3>SectionHead</h3><p>Eyebrow mono, título serif con resaltador y párrafo de cuerpo.</p></div></div>
+            <div class="card-head"><div><h3>SectionHead</h3><p>Mono eyebrow, serif heading with highlighter, body paragraph.</p></div></div>
             <div class="stage" style="place-items: start">
 <div class="stack">
   <p class="t-mono muted">Stack</p>
-  <h2 class="t-h2" data-highlight>Herramientas que [[conozco a fondo]]</h2>
-  <p class="t-body">Un párrafo corto que explica la sección.</p>
+  <h2 class="t-h2" data-highlight>Tools I [[know deeply]]</h2>
+  <p class="t-body">A short paragraph explaining the section.</p>
 </div>
             </div>
-            <details class="code"><summary>Código</summary></details>
+            <details class="code"><summary>Code</summary></details>
           </article>
 
           <article class="cbox card">
-            <div class="card-head"><div><h3>Grilla de tarjetas</h3><p><code>.grid-lines</code> + <code>.cbox-hover</code>: una grilla que se lee como un dibujo continuo.</p></div></div>
+            <div class="card-head"><div><h3>Card grid</h3><p><code>.grid-lines</code> + <code>.cbox-hover</code>: a grid that reads as one continuous drawing.</p></div></div>
             <div class="stage">
 <div class="grid grid-lines" style="--min: 120px; width: 100%">
   <div class="cbox cbox-hover" data-cursor="frame" style="padding: 12px">Backend</div>
@@ -968,54 +968,54 @@
   <div class="cbox cbox-hover" data-cursor="frame" style="padding: 12px">Frontend</div>
 </div>
             </div>
-            <details class="code"><summary>Código</summary></details>
+            <details class="code"><summary>Code</summary></details>
           </article>
         </div>
       </section>
 
-      <!-- 7. Accesibilidad -->
-      <section id="accesibilidad" class="section container-col reveal">
+      <!-- 7. Accessibility -->
+      <section id="accessibility" class="section container-col reveal">
         <div class="stack">
-          <p class="t-mono muted">07 · Reduced motion y accesibilidad</p>
-          <h2 class="t-h2" data-highlight>Nada se mueve [[sin permiso]].</h2>
+          <p class="t-mono muted">07 · Reduced motion and accessibility</p>
+          <h2 class="t-h2" data-highlight>Nothing moves [[without permission]].</h2>
           <p class="t-body">
-            <code>reduced-motion.css</code> se importa al final y neutraliza cada animación. Los scripts también leen
-            <code>prefers-reduced-motion</code>. Pruébalo en DevTools → Rendering → Emulate CSS prefers-reduced-motion.
+            <code>reduced-motion.css</code> is imported last and neutralizes every animation. The scripts also read
+            <code>prefers-reduced-motion</code>. Try it in DevTools → Rendering → Emulate CSS prefers-reduced-motion.
           </p>
         </div>
         <div class="table-wrap mt-10">
           <table class="table">
-            <thead><tr><th>Comportamiento</th><th>Con reduced motion</th></tr></thead>
+            <thead><tr><th>Behavior</th><th>With reduced motion</th></tr></thead>
             <tbody>
-              <tr><td>Reveal, entrada del hero</td><td>Visible de inmediato</td></tr>
-              <tr><td>Resaltador</td><td>Marcador estático</td></tr>
-              <tr><td>text-in, ping, dot-grid, marquee</td><td>Sin animación</td></tr>
-              <tr><td>Border beam</td><td>Oculto</td></tr>
-              <tr><td>Timeline</td><td>Dibujado completo</td></tr>
-              <tr><td>Cursor, parallax</td><td>Desactivados</td></tr>
-              <tr><td>Cambio de tema</td><td>Instantáneo</td></tr>
-              <tr><td>Corner box en hover</td><td>Se mantiene (no es movimiento)</td></tr>
+              <tr><td>Reveal, hero entrance</td><td>Shown immediately</td></tr>
+              <tr><td>Highlighter</td><td>Static marker</td></tr>
+              <tr><td>text-in, ping, dot-grid, marquee</td><td>No animation</td></tr>
+              <tr><td>Border beam</td><td>Hidden</td></tr>
+              <tr><td>Timeline</td><td>Fully drawn</td></tr>
+              <tr><td>Cursor, parallax</td><td>Disabled</td></tr>
+              <tr><td>Theme switch</td><td>Instant</td></tr>
+              <tr><td>Corner box hover</td><td>Kept (not motion)</td></tr>
             </tbody>
           </table>
         </div>
         <ul class="rules mt-10">
-          <li>Todos los tokens de texto pasan WCAG AA (4.5:1) sobre su superficie. <code>--text-disabled</code> es el gris más claro que todavía pasa.</li>
-          <li>Sobre el amarillo el texto siempre es oscuro (<code>#222220</code>), también en modo oscuro.</li>
-          <li>El foco visible es un outline de 2px en <code>--text-link</code> con offset de 2px.</li>
-          <li>El cursor nativo nunca se oculta; el personalizado solo lo decora y solo en punteros finos.</li>
-          <li>Las animaciones de más de 5 segundos con contenido llevan botón de pausa visible (WCAG 2.2.2).</li>
+          <li>Every text token passes WCAG AA (4.5:1) on its surface. <code>--text-disabled</code> is the lightest gray that still passes.</li>
+          <li>Text on the yellow is always dark (<code>#222220</code>), in dark mode too.</li>
+          <li>Focus is a 2px <code>--text-link</code> outline with a 2px offset.</li>
+          <li>The native cursor is never hidden; the custom one only decorates it, and only on fine pointers.</li>
+          <li>Content animations longer than five seconds get a visible pause button (WCAG 2.2.2).</li>
         </ul>
       </section>
 
-      <!-- 8. Reutilizar -->
-      <section id="reutilizar" class="section container-col reveal">
+      <!-- 8. Reuse -->
+      <section id="reuse" class="section container-col reveal">
         <div class="stack">
-          <p class="t-mono muted">08 · Cómo reutilizar</p>
-          <h2 class="t-h2" data-highlight>De esta hoja a un [[proyecto nuevo]].</h2>
-          <p class="t-body">Copia la carpeta <code>kit/</code> a tu proyecto y elige una de las dos rutas.</p>
+          <p class="t-mono muted">08 · How to reuse</p>
+          <h2 class="t-h2" data-highlight>From this sheet to a [[new project]].</h2>
+          <p class="t-body">Copy the <code>kit/</code> folder into your project and pick one of the two routes.</p>
         </div>
 
-        <h3 class="t-mono muted sub">A · HTML / CSS puro</h3>
+        <h3 class="t-mono muted sub">A · Plain HTML / CSS</h3>
         <div class="code-box"><pre data-copyable>&lt;!-- &lt;head&gt; --&gt;
 &lt;script&gt;
   // theme before first paint + enables the .js-only animations
@@ -1053,19 +1053,19 @@
 
 # pnpm add @fontsource-variable/inter @fontsource-variable/newsreader @fontsource-variable/geist-mono</pre></div>
 
-        <h3 class="t-mono muted sub">Para cambiar la marca</h3>
+        <h3 class="t-mono muted sub">Rebranding</h3>
         <ul class="rules">
-          <li>Cambia <code>--highlight</code> y <code>--cta</code> en <code>tokens.css</code>: el resto del sistema es neutro.</li>
-          <li>Ajusta <code>--surface-bg</code> para mover la temperatura del papel; mantén <code>--line-structure</code> unos 3 pasos más oscuro.</li>
-          <li>Vuelve a revisar el contraste de <code>--text-disabled</code>: es el que está más al límite.</li>
-          <li>Escribe los títulos con <code>[[...]]</code> y un <code>data-highlight</code> para tener el resaltador.</li>
+          <li>Change <code>--highlight</code> and <code>--cta</code> in <code>tokens.css</code>: the rest of the system is neutral.</li>
+          <li>Adjust <code>--surface-bg</code> to change the paper's warmth; keep <code>--line-structure</code> about 3 steps darker.</li>
+          <li>Recheck the contrast of <code>--text-disabled</code>: it is the closest to the limit.</li>
+          <li>Write headings with <code>[[...]]</code> and <code>data-highlight</code> to get the highlighter.</li>
         </ul>
       </section>
     </main>
 
     <footer>
       <div class="container-col row" style="justify-content: space-between; gap: 12px">
-        <p class="t-mono muted">Extraído de theboshy.github.io</p>
+        <p class="t-mono muted">Extracted from theboshy.github.io</p>
         <p class="t-mono muted">MIT · Peter G. Lobo</p>
       </div>
     </footer>
@@ -1094,35 +1094,35 @@
 
         /* Tokens (values mirror kit/tokens.css) */
         const groups = [
-          ['Superficies', [
-            ['surface-bg', '#f6f6f3', '#121212', 'Fondo de página y de tarjetas'],
-            ['surface-1', '#edede8', '#191919', 'Áreas hundidas, caras de las cajas iso'],
-            ['surface-2', '#e5e5e1', '#212121', 'Un paso más hundido'],
-            ['surface-beige', '#f1ede1', '#1c1b17', 'Variante cálida'],
-            ['surface-code', '#333333', '#1a1a1a', 'Bloques de código'],
+          ['Surfaces', [
+            ['surface-bg', '#f6f6f3', '#121212', 'Page and card background'],
+            ['surface-1', '#edede8', '#191919', 'Recessed areas, iso box faces'],
+            ['surface-2', '#e5e5e1', '#212121', 'One step further recessed'],
+            ['surface-beige', '#f1ede1', '#1c1b17', 'Warm variant'],
+            ['surface-code', '#333333', '#1a1a1a', 'Code blocks'],
           ]],
-          ['Líneas', [
-            ['line-structure', '#cfcfc9', '#ffffff1f', 'Bordes y la grilla compartida'],
-            ['line-divider', '#bebeb6', '#ffffff29', 'Divisores'],
-            ['line-strong', '#404039', '#8c8c8c', 'Bordes en hover, esquinas'],
+          ['Lines', [
+            ['line-structure', '#cfcfc9', '#ffffff1f', 'Borders and the shared grid'],
+            ['line-divider', '#bebeb6', '#ffffff29', 'Dividers'],
+            ['line-strong', '#404039', '#8c8c8c', 'Hover borders, corners'],
           ]],
-          ['Texto', [
-            ['text-primary', '#222220', '#ebebeb', 'Títulos', true],
-            ['text-secondary', '#3d3d38', '#dedede', 'Texto de tarjetas', true],
-            ['text-tertiary', '#6b6b66', '#b3b3b3cc', 'Cuerpo (.t-body)', true],
-            ['text-disabled', '#70706a', '#82827c', 'Etiquetas mono y metadatos', true],
-            ['text-link', '#4f39f6', '#9d8fff', 'Enlaces y foco', true],
+          ['Text', [
+            ['text-primary', '#222220', '#ebebeb', 'Headings', true],
+            ['text-secondary', '#3d3d38', '#dedede', 'Card text', true],
+            ['text-tertiary', '#6b6b66', '#b3b3b3cc', 'Body (.t-body)', true],
+            ['text-disabled', '#70706a', '#82827c', 'Mono labels and metadata', true],
+            ['text-link', '#4f39f6', '#9d8fff', 'Links and focus', true],
           ]],
-          ['Resaltador', [
-            ['highlight', '#fbff7a', '#fbff7a', 'Marcador, selección, estados activos'],
-            ['cta', '#fbff81', '#fbff81', 'Botón primario'],
+          ['Highlighter', [
+            ['highlight', '#fbff7a', '#fbff7a', 'Marker, selection, active states'],
+            ['cta', '#fbff81', '#fbff81', 'Primary button'],
           ]],
-          ['Acentos (solo diagramas)', [
-            ['accent-blue', '#438aa5', '#5ba5c0', 'Nodos'],
-            ['accent-pink', '#d05376', '#e0708f', 'Nodos'],
-            ['accent-orange', '#c17e2e', '#d8964a', 'Nodos'],
-            ['accent-green', '#538a2e', '#6fa84a', 'Nodos, estado ok'],
-            ['accent-violet', '#8a7fe0', '#a79ff0', 'Nodos'],
+          ['Accents (diagrams only)', [
+            ['accent-blue', '#438aa5', '#5ba5c0', 'Nodes'],
+            ['accent-pink', '#d05376', '#e0708f', 'Nodes'],
+            ['accent-orange', '#c17e2e', '#d8964a', 'Nodes'],
+            ['accent-green', '#538a2e', '#6fa84a', 'Nodes, ok status'],
+            ['accent-violet', '#8a7fe0', '#a79ff0', 'Nodes'],
           ]],
         ];
 
@@ -1189,8 +1189,8 @@
           details.insertAdjacentHTML('beforeend', `<div class="code-box"><pre data-copyable>${escapeHTML(html)}</pre></div>`);
         });
         document.querySelectorAll('[data-copyable]').forEach((pre) => {
-          pre.parentElement.insertAdjacentHTML('beforeend', '<button class="copy" type="button">Copiar</button>');
-          pre.parentElement.querySelector('.copy').addEventListener('click', () => copy(pre.textContent, 'Código copiado'));
+          pre.parentElement.insertAdjacentHTML('beforeend', '<button class="copy" type="button">Copy</button>');
+          pre.parentElement.querySelector('.copy').addEventListener('click', () => copy(pre.textContent, 'Code copied'));
         });
 
         /* Copy + toast */
@@ -1201,7 +1201,7 @@
             await navigator.clipboard.writeText(text);
             toast.textContent = label;
           } catch {
-            toast.textContent = 'No se pudo copiar';
+            toast.textContent = 'Could not copy';
           }
           toast.classList.add('is-on');
           clearTimeout(toastTimer);
@@ -1209,7 +1209,7 @@
         };
         swatches.addEventListener('click', (e) => {
           const el = e.target.closest('[data-copy]');
-          if (el) copy(el.dataset.copy, `Copiado ${el.dataset.copy}`);
+          if (el) copy(el.dataset.copy, `Copied ${el.dataset.copy}`);
         });
 
         /* Highlight: [[...]] → one marker span per word (kit/js/highlight.js) */
